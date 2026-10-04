@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HSK 1 Интенсив</title>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#ff3d77">
+<link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="HSK 1">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#faf6ef;--card:#fff;--tx:#2a2420;--mu:#7a6f66;--ac:#c8382d;--ok:#2e8b57;--bad:#c8382d;--bd:#e6ddd0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1917;--card:#292423;--tx:#f1ebe3;--mu:#a99e93;--ac:#ef6a5e;--ok:#4cc084;--bad:#ef6a5e;--bd:#3d3532}}
+:root[data-theme="dark"]{--bg:#1c1917;--card:#292423;--tx:#f1ebe3;--mu:#a99e93;--ac:#ef6a5e;--ok:#4cc084;--bad:#ef6a5e;--bd:#3d3532}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:12px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+h1{font-size:18px;margin:0}h1 span{color:var(--ac)}
+.stats{font-size:13px;color:var(--mu)}
+nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px}
+nav button{white-space:nowrap;border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:8px 12px;border-radius:20px;font-size:14px;cursor:pointer}
+nav button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;margin-top:10px}
+.big{font-size:56px;text-align:center;line-height:1.3;font-family:"Noto Serif SC","Songti SC",serif}
+.sent{font-size:30px;text-align:center;font-family:"Noto Serif SC","Songti SC",serif;line-height:2}
+.c{text-align:center}.mu{color:var(--mu);font-size:14px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.btn,.opt{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:12px;border-radius:12px;font-size:18px;cursor:pointer;font-family:inherit}
+.opt.ok{background:var(--ok);color:#fff;border-color:var(--ok)}.opt.bad{background:var(--bad);color:#fff;border-color:var(--bad)}
+.btn.p{background:var(--ac);color:#fff;border-color:var(--ac)}
+.row{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+.tok{display:inline-block;margin:4px;padding:6px 12px;border:1px solid var(--bd);border-radius:10px;font-size:26px;cursor:pointer;background:var(--card);font-family:"Noto Serif SC","Songti SC",serif}
+.ans{min-height:60px;border-bottom:2px dashed var(--bd);margin:10px 0;text-align:center}
+.w{cursor:pointer;border-bottom:1px dotted var(--mu)}
+.story{font-size:24px;line-height:2.2;font-family:"Noto Serif SC","Songti SC",serif}
+rt{font-size:11px;color:var(--mu);font-family:system-ui}
+#tip{position:fixed;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));max-width:616px;margin:auto;background:var(--tx);color:var(--bg);padding:10px 14px;border-radius:12px;display:none;text-align:center}
+.bar{height:6px;background:var(--bd);border-radius:3px;margin-bottom:10px}.bar i{display:block;height:100%;background:var(--ac);border-radius:3px}
+label{font-size:13px;color:var(--mu);cursor:pointer}
+body{background:linear-gradient(160deg,#fff1e0,#ffe0ea 55%,#dfe8ff) fixed}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body{background:linear-gradient(160deg,#1c1726,#2a1a30 55%,#15202e) fixed}}
+:root[data-theme="dark"] body{background:linear-gradient(160deg,#1c1726,#2a1a30 55%,#15202e) fixed}
+.card{box-shadow:0 6px 18px rgba(200,56,45,.12);border-radius:20px}
+.btn.p{background:linear-gradient(135deg,#ff8a5c,#e63e6d);border:0;color:#fff;box-shadow:0 4px 12px rgba(230,62,109,.35)}
+nav button.on{background:linear-gradient(135deg,#ff8a5c,#e63e6d);border:0}
+.opt:hover{border-color:var(--ac)}
+.coach{display:flex;gap:10px;align-items:flex-start;margin:10px 0}
+.av{font-size:34px;background:var(--card);border-radius:50%;width:54px;height:54px;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 3px 10px rgba(0,0,0,.12);animation:bob 2.5s infinite}
+.bub{background:var(--card);border:1px solid var(--bd);border-radius:6px 18px 18px 18px;padding:10px 14px}
+.map{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:10px;margin-top:14px}
+.tile{aspect-ratio:1;border:0;border-radius:50%;font-size:20px;font-weight:700;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;line-height:1.1}
+.tile small{font-size:10px;color:#ffe066;min-height:12px}
+.tile.done{background:linear-gradient(135deg,#43c59e,#2e8b57)}
+.tile.cur{background:linear-gradient(135deg,#ffb347,#ff5e62);animation:pulse 1.4s infinite}
+.tile.lock{background:var(--bd);color:var(--mu);cursor:default}
+.xb{height:5px;background:var(--bd);border-radius:3px;margin-top:3px;width:120px}.xb i{display:block;height:100%;background:linear-gradient(90deg,#ffb347,#e63e6d);border-radius:3px}
+.win{animation:pop .5s}
+@keyframes bob{50%{transform:translateY(-4px)}}
+@keyframes pulse{50%{transform:scale(1.1);box-shadow:0 0 0 8px rgba(255,94,98,.2)}}
+@keyframes pop{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+header{background:linear-gradient(135deg,#ff8a5c,#e63e6d 55%,#8a4fff);color:#fff;border-radius:18px;padding:10px 14px;box-shadow:0 6px 18px rgba(138,79,255,.3)}
+h1 span{color:#ffe066}.stats{color:#fff}.xb{background:rgba(255,255,255,.3)}
+.wrap{position:relative;z-index:1}
+body::before,body::after{position:fixed;font-size:54px;opacity:.14;pointer-events:none;animation:bob 4s infinite}
+body::before{content:"🏮";top:12%;left:3%}body::after{content:"🌸";bottom:10%;right:4%}
+.big{text-shadow:0 3px 0 rgba(230,62,109,.18)}
+.map{display:flex;flex-direction:column;gap:14px;margin:8px 0;grid-template-columns:none}
+.tile{width:68px;height:68px;aspect-ratio:auto;position:relative;box-shadow:0 5px 0 rgba(0,0,0,.15)}
+.tile.boss{box-shadow:0 0 0 4px #ffd34d,0 5px 0 rgba(0,0,0,.15)}
+.tile.boss::after{content:"🏆";position:absolute;top:-10px;right:-10px;font-size:20px}
+.rep{border:2px solid #ffb347}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chips span,.chip2{background:linear-gradient(135deg,#fff3d6,#ffe0ea);color:#5a3a2a;padding:4px 10px;border-radius:14px;font-size:14px;display:inline-block;margin:2px}
+.chip2{font-size:20px;font-family:"Noto Serif SC",serif;border:0}
+.conf span{position:fixed;top:-30px;font-size:26px;animation:fall 2.2s linear forwards;pointer-events:none;z-index:9}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+.tb{height:8px;background:var(--bd);border-radius:4px;margin-bottom:10px;overflow:hidden}.tb i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#e63e6d,#ffb347,#43c59e);transform-origin:left}
+#nav{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;justify-content:space-around;gap:0;overflow:visible;background:var(--card);border-top:1px solid var(--bd);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));box-shadow:0 -4px 14px rgba(0,0,0,.08)}
+#nav button{flex:1;border:0;background:none;border-radius:12px;display:flex;flex-direction:column;align-items:center;font-size:11px;padding:4px 2px;color:var(--mu);cursor:pointer}
+#nav button span{font-size:23px;line-height:1.2}
+#nav button.on{color:var(--ac);font-weight:700;background:none}
+#nav button.on span{transform:scale(1.15)}
+.wrap{padding-bottom:96px}
+#tip{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+.opt{min-height:56px;font-size:20px;word-break:break-word}
+.qh{display:flex;justify-content:space-between;align-items:center;margin:4px 0 6px;color:var(--mu);font-size:14px}
+.x{border:1px solid var(--bd);background:var(--card);border-radius:50%;width:34px;height:34px;color:var(--tx);font-size:16px;cursor:pointer}
+.hub{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.ht{border:0;border-radius:20px;padding:16px 12px;color:#fff;text-align:left;cursor:pointer;font-size:13px;min-height:116px;box-shadow:0 6px 14px rgba(0,0,0,.15);font-family:inherit}
+.ht span{font-size:32px}.ht b{display:block;font-size:17px;margin:6px 0 2px}
+.hub .ht:last-child{grid-column:1/-1;min-height:90px}
+.srow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 0;border-bottom:1px solid var(--bd)}
+.sw{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:20px;padding:6px 14px;font-size:15px;cursor:pointer}
+.sw.on{background:var(--ok);color:#fff;border-color:var(--ok)}
+body{background:radial-gradient(circle at 15% 8%,rgba(255,210,110,.45),transparent 38%),repeating-linear-gradient(45deg,rgba(200,30,40,.06) 0 14px,transparent 14px 28px),linear-gradient(165deg,#fff1d6,#ffd2bd 55%,#f2a99a) fixed}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body{background:radial-gradient(circle at 15% 8%,rgba(240,168,48,.25),transparent 38%),repeating-linear-gradient(45deg,rgba(255,80,60,.07) 0 14px,transparent 14px 28px),linear-gradient(165deg,#2b0d12,#4a1519 60%,#2a0f12) fixed}}
+:root[data-theme="dark"] body{background:radial-gradient(circle at 15% 8%,rgba(240,168,48,.25),transparent 38%),repeating-linear-gradient(45deg,rgba(255,80,60,.07) 0 14px,transparent 14px 28px),linear-gradient(165deg,#2b0d12,#4a1519 60%,#2a0f12) fixed}
+body::before{content:"🏮"}body::after{content:"🎋"}
+header{background:linear-gradient(135deg,#ff7a45,#ff3d77 55%,#f0a830)}
+.wrap{max-width:480px}
+.big2{font-size:19px;padding:14px 24px}
+.bub small{display:block;color:var(--ac);font-weight:700;font-size:12px}
+.rw{display:flex;align-items:center;gap:8px}
+.bd{width:84px;height:84px;border:0;background:none;position:relative;display:flex;flex-direction:column;align-items:center;cursor:pointer;color:var(--tx);font-family:inherit;padding:0}
+.bd .bi{font-size:44px;line-height:1;z-index:1;filter:drop-shadow(0 6px 2px rgba(0,0,0,.3));transition:transform .2s}
+.bd.cur .bi{animation:bob 1.5s infinite}.bd.lock .bi{filter:grayscale(1) opacity(.5)}.bd.done:active .bi{transform:scale(1.15)}
+.slab{position:absolute;bottom:18px;width:72px;height:24px;border-radius:50%;background:radial-gradient(#f0a830,#b3122a);box-shadow:0 5px 0 #7a0c1d}
+.bd.lock .slab{background:radial-gradient(#ccc,#999);box-shadow:0 5px 0 #777}
+.bd.done .slab{background:radial-gradient(#7ee0a8,#2e8b57);box-shadow:0 5px 0 #1d6a40}
+.bd.boss .slab{background:radial-gradient(#ffe066,#e8a000);box-shadow:0 5px 0 #a06a00}
+.bd b{position:absolute;bottom:-4px;font-size:13px;background:var(--card);padding:0 8px;border-radius:10px;border:1px solid var(--bd)}
+.bd small{position:absolute;top:-6px;color:#e8a000;font-size:11px}
+.cc{display:flex;flex-direction:column;align-items:center;font-size:26px}.cc small{font-size:10px;color:var(--mu)}
+.gate{display:flex;flex-direction:column;align-items:center;text-align:center;font-size:40px;background:linear-gradient(135deg,#ff7a45,#ff3d77);color:#fff;border-radius:20px;padding:12px;margin:10px 0;box-shadow:0 6px 0 #7a0c1d}
+.gate b{font-size:17px}.gate span{font-size:13px;opacity:.9}
+.gate.gold{background:linear-gradient(135deg,#f0a830,#ffe066);color:#5a2d00;box-shadow:0 6px 0 #a06a00}.gate.dim{filter:saturate(.5)}
+.pr{border:2px solid #f0a830}.lk{opacity:.85}.lk .bar{margin:8px 0}
+.st{width:100%;text-align:left;display:block;cursor:pointer;color:var(--tx);font-family:inherit;font-size:16px}
+.bt{width:100%;border-collapse:collapse;margin:8px 0}.bt td{padding:8px 4px;border-bottom:1px solid var(--bd);font-size:15px}.bt .bh{font-size:28px;font-family:"Noto Serif SC",serif}
+.sk{display:grid;grid-template-columns:90px 1fr 44px;gap:8px;align-items:center;margin-top:8px;font-size:14px}.sk .bar{margin:0}
+body{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120'%3E%3Cpath d='M0 120V80Q40 30 80 70T150 60Q200 10 250 65T330 55Q370 35 400 70V120Z' fill='%23222' fill-opacity='.1'/%3E%3Cpath d='M0 120V95Q60 60 120 90T240 85T400 90V120Z' fill='%23222' fill-opacity='.08'/%3E%3C/svg%3E") bottom/100% auto no-repeat fixed,radial-gradient(circle at 20% 0,rgba(255,255,255,.8),transparent 55%),repeating-linear-gradient(0deg,rgba(120,90,50,.04) 0 2px,transparent 2px 5px),#f4ecd8}
+:root{--card:#fffaf0;--bd:#e3d6bd}
+.hero{text-align:center;padding:18px 10px;background:linear-gradient(135deg,#ff7a45,#ff3d77 60%,#f0a830);color:#fff;border-radius:22px;box-shadow:0 8px 20px rgba(179,18,42,.3);margin-top:6px}
+.hero h2{margin:6px 0 2px;font-family:"Noto Serif SC",serif;font-size:26px}.hero p{margin:0;opacity:.92;font-size:14px}
+.seal{display:inline-block;width:54px;height:54px;line-height:54px;background:#fff;color:#b3122a;font-size:34px;font-family:"Noto Serif SC",serif;border-radius:8px;transform:rotate(-6deg);box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.back{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:20px;padding:8px 16px;font-size:15px;cursor:pointer;margin:6px 0;font-family:inherit}
+.cont{border-left:6px solid #b3122a}
+#tip{background:var(--card);color:var(--tx);border:2px solid var(--ac);text-align:left;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.tp{display:flex;align-items:center;gap:8px}.th{font-size:34px;font-family:"Noto Serif SC",serif}
+
+:root{--gold:#c9a35b;--card:rgba(255,252,246,.9);--bd:rgba(120,90,50,.22);--tx:#2a2420;--mu:#7a6f66}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--card:rgba(34,28,30,.88);--bd:rgba(201,163,91,.22);--tx:#f1e8d6;--mu:#b5a58c}}
+:root[data-theme="dark"]{--card:rgba(34,28,30,.88);--bd:rgba(201,163,91,.22);--tx:#f1e8d6;--mu:#b5a58c}
+body{background:radial-gradient(circle at 85% 8%,#fff7e0 0,transparent 35%),linear-gradient(180deg,#f6eedd,#eadcc0) fixed!important}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body{background:radial-gradient(circle at 85% 8%,#4a3a2a 0,transparent 30%),linear-gradient(180deg,#0f0d14,#1d1318) fixed!important}}
+:root[data-theme="dark"] body{background:radial-gradient(circle at 85% 8%,#4a3a2a 0,transparent 30%),linear-gradient(180deg,#0f0d14,#1d1318) fixed!important}
+body::before{content:"";font-size:0;position:fixed;inset:0;top:0;left:0;bottom:auto;right:auto;width:100%;height:100%;opacity:1;animation:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30'%3E%3Cg fill='none' stroke='%23b8935a' stroke-opacity='.22'%3E%3Ccircle cx='0' cy='15' r='28'/%3E%3Ccircle cx='60' cy='15' r='28'/%3E%3Ccircle cx='30' cy='30' r='28'/%3E%3Ccircle cx='30' cy='30' r='18'/%3E%3Ccircle cx='30' cy='30' r='8'/%3E%3C/g%3E%3C/svg%3E")}
+body::after{content:"";font-size:0;position:fixed;left:0;right:0;bottom:0;top:auto;width:100%;height:200px;opacity:.1;animation:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120' preserveAspectRatio='none'%3E%3Cpath d='M0 120V80Q40 30 80 70T150 60Q200 10 250 65T330 55Q370 35 400 70V120Z' fill='%23222'/%3E%3C/svg%3E") bottom/100% 100% no-repeat}
+header{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:22px;background:linear-gradient(120deg,#14100e,#3a1218 45%,#7a1a22 75%,#14100e);background-size:300% 300%;animation:hd 14s ease infinite;color:#f5e6c4;border:1px solid rgba(201,163,91,.55);box-shadow:0 12px 30px rgba(40,10,10,.35);overflow:hidden}
+header::after{content:"汉";position:absolute;right:62px;top:-26px;font:900 110px "Noto Serif SC",serif;color:rgba(201,163,91,.13);pointer-events:none}
+@keyframes hd{50%{background-position:100% 50%}}
+header h1{font:700 21px "Noto Serif SC",Georgia,serif;letter-spacing:.02em}header h1 span{color:#e6c27a}
+.ht2{flex:1;position:relative;z-index:1}.ht2 small{font-size:11px;letter-spacing:.18em;color:#c9a35b;text-transform:uppercase}
+header .stats{color:#f5e6c4;text-align:right;z-index:1;font-size:12px}header .xb{margin-left:auto;background:rgba(255,255,255,.2)}
+#bk{display:none;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1px solid rgba(201,163,91,.6);background:rgba(0,0,0,.25);color:#f0d28a;font-size:20px;cursor:pointer;z-index:2}
+.card{background:var(--card)!important;backdrop-filter:blur(8px);border:1px solid var(--bd)!important;border-radius:18px!important;box-shadow:0 10px 28px rgba(60,30,10,.12)!important}
+.hero{background:linear-gradient(135deg,#7a1a22,#a3232b 70%,#c9a35b)!important;border:1px solid rgba(201,163,91,.6)}
+.ht{border:1px solid rgba(201,163,91,.45)!important;color:#f3e3bd!important;border-radius:18px!important}.ht b{color:#e6c27a;font:700 18px "Noto Serif SC",Georgia,serif}
+
+#nav{background:rgba(20,16,14,.94)!important;border-top:1px solid var(--gold)!important;backdrop-filter:blur(8px)}#nav button{color:#cdbb97!important;background:none!important;border:0!important}#nav button.on{color:#f0d28a!important;background:rgba(201,163,91,.16)!important}
+.btn.p,nav button.on{background:linear-gradient(135deg,#a3232b,#c9763b)!important}
+.tg.on{background:linear-gradient(135deg,#a3232b,#c9763b)!important;color:#fff!important}.trn{padding:10px 14px;border-left:3px solid var(--gold);background:rgba(201,163,91,.1);border-radius:8px;font-size:15px}
+#tip{z-index:60!important;bottom:calc(84px + env(safe-area-inset-bottom,0px))!important}
+.dy{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px;border-radius:16px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font-family:inherit;cursor:pointer}
+.dy .dn{font:700 18px Georgia,serif;font-style:normal;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--bd)}
+.dy.done .dn{background:#2e8b57;color:#fff}.dy.cur{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,163,91,.4)}.dy.cur .dn{background:linear-gradient(135deg,#c9a35b,#a3232b);color:#fff}.dy.boss .dn{background:#c9a35b;color:#2a1a00}.dy.lock{opacity:.55;cursor:default}
+.dy .db{flex:1;display:flex;flex-direction:column;gap:3px}.dy .dw{font:18px "Noto Serif SC",serif;color:var(--mu)}.dy .ds u{text-decoration:none;font-size:11px;margin-right:6px;padding:1px 8px;border:1px solid var(--bd);border-radius:10px;color:var(--mu)}.dy em{font-style:normal;color:#c9a35b}
+.map{gap:8px!important}.wk{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);margin:10px 4px 0}
+
+/* мягкий стиль + 3D карта */
+body{background:radial-gradient(circle at 85% 6%,#fffbe8 0,transparent 38%),linear-gradient(180deg,#fbf3e4,#f0e0c4) fixed!important}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body{background:radial-gradient(circle at 85% 6%,#5a4632 0,transparent 32%),linear-gradient(180deg,#1b1620,#2b1d24) fixed!important}}
+:root[data-theme="dark"] body{background:radial-gradient(circle at 85% 6%,#5a4632 0,transparent 32%),linear-gradient(180deg,#1b1620,#2b1d24) fixed!important}
+header{background:linear-gradient(120deg,#9a3236,#cf5a4c 55%,#e0a45f,#9a3236);background-size:300% 300%;border:1px solid rgba(255,255,255,.45);box-shadow:0 10px 26px rgba(160,60,50,.28);color:#fff8ea}
+header h1 span{color:#ffe9a8}.ht2 small{color:#ffe3a0}header .stats{color:#fff8ea}#bk{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.6);color:#fff}
+.card{border-radius:22px!important;box-shadow:0 8px 22px rgba(120,70,40,.1)!important}
+.ht{border:1px solid rgba(255,255,255,.4)!important;color:#fff8ea!important;border-radius:22px!important;box-shadow:0 8px 18px rgba(120,60,40,.2)!important}.ht b{color:#fff;font-size:18px}
+
+#nav{background:var(--card)!important;border-top:1px solid var(--bd)!important}#nav button{color:var(--mu)!important}#nav button.on{color:var(--ac)!important;background:rgba(207,90,76,.12)!important;border-radius:14px!important}
+.btn:active,.opt:active{transform:scale(.97)}.btn,.opt{transition:transform .12s,border-color .2s}
+.wod .big3{font:44px "Noto Serif SC",serif;cursor:pointer}
+.map{perspective:900px;perspective-origin:50% 20%;gap:4px!important}
+.rw3{display:flex;align-items:center;gap:14px;padding:10px 0 12px var(--o);transform:rotateX(10deg);transform-origin:50% 100%}
+.nd{position:relative;flex:none;width:78px;height:64px;border:0;background:none;padding:0;cursor:pointer}
+.nd .top{position:absolute;inset:0 0 10px;border-radius:50%;display:grid;place-items:center;font:700 24px Georgia,serif;font-style:normal;color:#fff;background:radial-gradient(circle at 35% 28%,#ffd9a0,#e0715a 55%,#a3342f);box-shadow:0 5px 0 #7d2623,0 11px 0 #5a1b1a,0 20px 22px rgba(60,20,10,.35);transition:transform .15s,box-shadow .15s}
+.nd:active .top{transform:translateY(5px);box-shadow:0 1px 0 #7d2623,0 4px 0 #5a1b1a,0 8px 10px rgba(60,20,10,.3)}
+.nd.done .top{background:radial-gradient(circle at 35% 28%,#c5f5d6,#4fbf88 55%,#23805a);box-shadow:0 5px 0 #1b6544,0 11px 0 #124a32,0 20px 22px rgba(10,60,30,.3)}
+.nd.cur .top{background:radial-gradient(circle at 35% 28%,#fff0b8,#f4b24e 50%,#d4552f);box-shadow:0 5px 0 #9a3a1c,0 11px 0 #6e2a14,0 0 0 8px rgba(244,178,78,.3),0 22px 26px rgba(120,50,10,.4);animation:pls 1.6s infinite}
+.nd.boss .top{background:radial-gradient(circle at 35% 28%,#fff3c0,#f0c14b 55%,#b9821c);color:#5a3800;box-shadow:0 5px 0 #8a5f10,0 11px 0 #5e3f0a,0 20px 22px rgba(90,60,0,.35)}
+.nd.lock .top{background:radial-gradient(circle at 35% 28%,#e9e4dc,#b8b0a4 60%,#8f877c);box-shadow:0 5px 0 #716a60,0 11px 0 #565046,0 18px 18px rgba(0,0,0,.18);font-size:20px}
+@keyframes pls{50%{transform:translateY(-4px)}}
+.me{position:absolute;left:50%;top:-34px;margin-left:-18px;font-size:36px;z-index:2;filter:drop-shadow(0 6px 4px rgba(0,0,0,.3));animation:bob 1.4s infinite}
+.pl{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:8px 12px;min-width:0;flex:1;max-width:210px;display:flex;flex-direction:column;box-shadow:0 6px 14px rgba(120,70,40,.1)}
+.pl span{font:20px "Noto Serif SC",serif;letter-spacing:.06em}.pl small{color:var(--mu);font-size:11px}
+.wld{text-align:center;margin:14px 0 4px;padding:10px;border-radius:20px;background:linear-gradient(135deg,rgba(207,90,76,.18),rgba(224,164,95,.28));border:1px solid var(--bd)}.wld b{font-size:30px;display:block}.wld span{font:700 14px "Noto Serif SC",serif;letter-spacing:.08em}
+
+/* v4: яркий современный стиль */
+:root{--card:#fff;--bd:#ece6f5;--tx:#241a3a;--mu:#7a7096;--ac:#ff3d77}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--card:#1d1833;--bd:#332b55;--tx:#f4f0ff;--mu:#a69cc8;--ac:#ff6b93}}
+:root[data-theme="dark"]{--card:#1d1833;--bd:#332b55;--tx:#f4f0ff;--mu:#a69cc8;--ac:#ff6b93}
+body{background:linear-gradient(180deg,#eaf3ff,#fbeefa 60%,#fff3e8)!important;min-height:100vh}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body{background:linear-gradient(180deg,#0e1230,#1a1038 60%,#220f2c)!important}}
+:root[data-theme="dark"] body{background:linear-gradient(180deg,#0e1230,#1a1038 60%,#220f2c)!important}
+body::before,body::after,header::after{content:none!important}
+.wrap{padding-bottom:104px}
+header{animation:none!important;top:8px;padding:10px 14px;border:0!important;border-radius:24px;background:linear-gradient(120deg,#ff7a45,#ff3d77 50%,#7c4dff)!important;box-shadow:0 12px 28px rgba(255,61,119,.32)!important;color:#fff}
+.ht2 b{display:block;font:800 22px system-ui;letter-spacing:.04em}.ht2 small{font-size:11px;opacity:.85;letter-spacing:.06em}
+header .stats{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;max-width:60%}.pl2{background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.4);border-radius:14px;padding:3px 9px;font-weight:700;font-size:12px}header .xb{flex-basis:100%;width:100%;margin:0}header .xb i{background:#fff}
+#bk{background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.55);color:#fff}
+.card{backdrop-filter:none!important;border-radius:24px!important;border:1px solid var(--bd)!important;box-shadow:0 10px 26px rgba(110,70,200,.12)!important}
+.trh{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;border:0;border-radius:26px;padding:18px 20px;margin:8px 0 2px;color:#fff;text-align:left;font-family:inherit;cursor:pointer;background:linear-gradient(135deg,#7c4dff,#ff3d77 60%,#ff9a3d);box-shadow:0 14px 30px rgba(124,77,255,.4)}
+.trh small{opacity:.85;letter-spacing:.12em;text-transform:uppercase;font-size:11px}.trh b{display:block;font-size:22px;margin:2px 0}.trh span{font-size:13px;opacity:.92}.trh em{font-style:normal;font-size:54px;filter:drop-shadow(0 6px 6px rgba(0,0,0,.25))}.trh:active{transform:scale(.98)}
+.prg{box-shadow:0 14px 30px rgba(124,77,255,.2)!important}.bar{height:10px!important;background:var(--bd)!important}.bar i{background:linear-gradient(90deg,#ff9a3d,#ff3d77,#7c4dff)!important}.cont{border-left:6px solid #ff3d77!important}
+.ht{border:0!important;color:#fff!important;border-radius:24px!important;box-shadow:0 10px 22px rgba(80,50,160,.22)!important}.ht b{color:#fff;font:700 18px system-ui}
+.btn.p,nav button.on{background:linear-gradient(135deg,#ff7a45,#ff3d77)!important;color:#fff!important}
+#nav{left:12px!important;right:12px!important;bottom:calc(10px + env(safe-area-inset-bottom,0px))!important;border-radius:26px;border:0!important;background:var(--card)!important;box-shadow:0 12px 32px rgba(80,40,160,.28)}
+#nav button{color:var(--mu)!important;background:none!important;border:0!important;border-radius:20px!important}#nav button.on{background:linear-gradient(135deg,#ff7a45,#ff3d77)!important;color:#fff!important}
+#tip{z-index:60!important;bottom:calc(96px + env(safe-area-inset-bottom,0px))!important}
+.auth{text-align:center;margin-top:14px}.auth small{color:var(--mu)}.auth b{display:block;font-size:20px;margin:2px 0 8px}.auth a{color:var(--ac);font-weight:700;text-decoration:none}
+.map{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:0!important;padding:16px 0 26px;border-radius:30px;background:linear-gradient(180deg,#9be7ff,#38a8f2 45%,#1f64cc);box-shadow:inset 0 0 0 3px rgba(255,255,255,.45),0 16px 34px rgba(31,100,204,.35)}
+.map::before{content:"";position:absolute;inset:0 -60px;background:repeating-radial-gradient(circle at 50% 130%,transparent 0 16px,rgba(255,255,255,.22) 16px 18px);animation:wv 9s linear infinite;pointer-events:none}
+@keyframes wv{to{transform:translateX(60px)}}
+.rw3{position:relative;z-index:1;display:flex;padding:0 0 0 var(--o)!important;transform:none!important}
+.nd{position:relative;flex:none;width:96px;height:92px;border:0;background:none;padding:0;cursor:pointer}
+.foam{position:absolute;left:2px;right:2px;bottom:4px;height:46px;border-radius:50%;background:rgba(255,255,255,.35);animation:fm 3s ease-in-out infinite}
+@keyframes fm{50%{transform:scale(1.1);opacity:.55}}
+.isl{position:absolute;left:10px;right:10px;bottom:10px;height:38px;border-radius:50%;background:radial-gradient(#a6ec84,#4fb35a);box-shadow:0 7px 0 #d3ad70,0 12px 0 #8a6a3e,0 18px 16px rgba(0,40,90,.35)}
+.lm{position:absolute;left:18px;bottom:24px;width:60px;height:60px;filter:drop-shadow(0 4px 3px rgba(0,0,0,.28));transition:transform .2s}.nd:active .lm{transform:translateY(3px) scale(.97)}
+.bn{position:absolute;right:0;top:4px;min-width:26px;height:26px;padding:0 6px;border-radius:13px;background:#fff;color:#2a2f6a;font:700 13px system-ui;display:grid;place-items:center;box-shadow:0 3px 8px rgba(0,0,0,.25)}
+.nd.done .bn{background:#2fcf84;color:#fff}.nd.cur .isl{background:radial-gradient(#ffe27a,#ffb03b)}.nd.cur .foam{background:rgba(255,230,120,.55)}.nd.cur .lm{animation:bob 1.6s infinite}.nd.cur .bn{background:#ff3d77;color:#fff}
+.nd.lock{filter:grayscale(.8);opacity:.7;cursor:default}.cr{position:absolute;top:-10px;left:36px;font-size:22px}.me{position:absolute;top:-12px;left:0;font-size:26px;animation:bob 1.2s infinite;z-index:2}
+.wld{position:relative;z-index:1;margin:8px auto 2px;padding:6px 16px;width:max-content;max-width:92%;border-radius:20px;background:rgba(255,255,255,.92);border:0;box-shadow:0 6px 14px rgba(0,40,90,.25)}.wld span{font:700 13px system-ui;color:#1f3a7a}
+
+.sth,.bkh{position:relative;margin:8px 0 4px;padding:16px 18px;border-radius:26px;color:#fff;background:linear-gradient(135deg,#7c4dff,#ff3d77 65%,#ff9a3d);box-shadow:0 14px 30px rgba(124,77,255,.35)}
+.bkh{background:linear-gradient(135deg,#ff7a45,#ff3d77 60%,#7c4dff)}
+.sth small,.bkh small{opacity:.85;letter-spacing:.1em;text-transform:uppercase;font-size:11px}.sth b,.bkh b{display:block;font-size:24px;margin:2px 0 8px}.bkh b span{opacity:.7;font-size:16px}.sth span{font-size:13px;opacity:.92;display:block;margin-top:8px}
+.sth .bar,.bkh .bar{background:rgba(255,255,255,.3)!important}.sth .bar i,.bkh .bar i{background:#fff!important}.bkh .sw{position:absolute;right:14px;top:14px;border:0;border-radius:14px;padding:6px 12px;background:rgba(255,255,255,.25);color:#fff;font-weight:700}
+.sc{display:flex;align-items:center;gap:12px;width:100%;text-align:left;margin-top:10px;padding:12px 14px;border-radius:22px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font-family:inherit;box-shadow:0 8px 20px rgba(110,70,200,.12);cursor:pointer}
+.sc:active{transform:scale(.98)}.sn{font-style:normal;flex:none;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font:800 18px system-ui;color:#fff;background:linear-gradient(135deg,#ff7a45,#ff3d77)}
+.sb{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.sb b{font-size:16px}.sp{font:18px "Noto Serif SC",serif;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sb small{color:var(--mu);font-size:12px}.sc em{font-style:normal;font-size:20px}
+.lk2{cursor:default;box-shadow:none;background:color-mix(in srgb,var(--card) 70%,transparent)}.lk2 .sn{background:linear-gradient(135deg,#b9b3cc,#8d86a6)}.lk2 .sp{filter:blur(4px);opacity:.8}.lk2 .bar{height:6px!important;margin-top:4px}
+.wl{display:flex;flex-direction:column;gap:8px;margin-top:10px}.wr{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:18px;background:color-mix(in srgb,var(--bd) 45%,transparent);cursor:pointer}
+.wr:active{transform:scale(.98)}.bh2{font:34px "Noto Serif SC",serif;min-width:58px;text-align:center}.wm{flex:1;min-width:0;display:flex;flex-direction:column}.wm span{color:var(--mu);font-size:14px}
+.ib{border:0;background:var(--card);border-radius:12px;width:36px;height:36px;font-size:16px;cursor:pointer;box-shadow:0 3px 8px rgba(110,70,200,.15);color:var(--tx)}
+.pager{position:sticky;bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:4;display:flex;align-items:center;gap:8px;margin-top:12px;padding:8px;border-radius:24px;background:var(--card);box-shadow:0 10px 26px rgba(110,70,200,.25)}
+.pg{flex:none;width:42px;height:42px;border:0;border-radius:50%;font-size:24px;color:#fff;background:linear-gradient(135deg,#ff7a45,#ff3d77);cursor:pointer}.pg:disabled{opacity:.35}
+.chips{flex:1;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}.chips::-webkit-scrollbar{display:none}
+.ch{flex:none;min-width:38px;height:38px;border-radius:12px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font-weight:700;cursor:pointer}.ch.dn2{background:#d9f7e8;color:#16824f}.ch.on{background:linear-gradient(135deg,#7c4dff,#ff3d77);color:#fff;border:0}
+
+.back{display:none!important}.pager{position:static!important}
+#tip{padding:0!important;background:var(--card)!important;border:0!important;border-radius:28px!important;box-shadow:0 18px 44px rgba(80,40,160,.4)!important;overflow:hidden;text-align:left}
+.tp2{position:relative;display:flex;gap:14px;align-items:center;padding:14px;background:linear-gradient(135deg,rgba(255,122,69,.14),rgba(124,77,255,.16))}
+.gridbox{position:relative;flex:none;width:140px;height:140px;border-radius:20px;background:#fffdf7;border:2px solid #ff3d77;display:grid;place-items:center;overflow:hidden;box-shadow:inset 0 0 0 3px #fff,0 8px 18px rgba(255,61,119,.25)}
+.gl{position:absolute;inset:0;background:linear-gradient(#0000 calc(50% - 1px),rgba(255,61,119,.4) 0 calc(50% + 1px),#0000 0),linear-gradient(90deg,#0000 calc(50% - 1px),rgba(255,61,119,.4) 0 calc(50% + 1px),#0000 0),linear-gradient(45deg,#0000 calc(50% - .5px),rgba(255,61,119,.2) 0 calc(50% + .5px),#0000 0),linear-gradient(-45deg,#0000 calc(50% - .5px),rgba(255,61,119,.2) 0 calc(50% + .5px),#0000 0)}
+.gc{position:relative;font-family:"Noto Serif SC","Songti SC",serif;color:#2c1f4a;white-space:nowrap;animation:ink 2.4s ease-out both}
+@keyframes ink{0%{opacity:1;clip-path:inset(0 100% 0 0)}60%{opacity:1;clip-path:inset(0 0 0 0)}100%{opacity:.25;clip-path:inset(0 0 0 0)}}
+#cv{position:absolute;inset:0;width:100%;height:100%}
+.tinfo{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;padding-right:22px}.tpy{font-size:26px;color:var(--ac)}.trs{font-size:18px}.tbt{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}.tinfo small{color:var(--mu);font-size:11px}
+#tip .x{position:absolute;right:10px;top:10px;width:30px;height:30px;border-radius:50%;border:0;background:var(--bd);color:var(--tx);cursor:pointer;z-index:3}
+.auth{padding-top:20px!important}.ph{width:132px;height:132px;margin:0 auto 12px;padding:4px;border-radius:50%;background:linear-gradient(135deg,#ff7a45,#ff3d77,#7c4dff);box-shadow:0 12px 26px rgba(255,61,119,.35)}.ph img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid var(--card);display:block}
+.auth .ig{display:inline-block;padding:9px 20px;border-radius:20px;color:#fff;background:linear-gradient(135deg,#ff7a45,#ff3d77 55%,#7c4dff);box-shadow:0 8px 18px rgba(255,61,119,.3)}
+</style></head><body><div class="wrap">
+<header><button id="bk" onclick="bkb()">←</button><div class="ht2"><b>HSK 1</b><small>твой маршрут</small></div><div class="stats" id="st"></div></header>
+<nav id="nav"></nav><div id="app"></div></div><div id="tip"></div>
+<script>
+const WS=`我|wǒ|я
+你|nǐ|ты
+他|tā|он
+她|tā|она
+我们|wǒmen|мы
+是|shì|быть, есть
+不|bù|не
+有|yǒu|иметь
+没有|méiyǒu|не иметь
+好|hǎo|хороший
+吗|ma|(вопросит. частица)
+爱|ài|любить
+喜欢|xǐhuan|нравиться
+吃|chī|есть (еду)
+喝|hē|пить
+水|shuǐ|вода
+茶|chá|чай
+米饭|mǐfàn|варёный рис
+苹果|píngguǒ|яблоко
+去|qù|идти, ехать
+来|lái|приходить
+学校|xuéxiào|школа
+家|jiā|дом, семья
+学习|xuéxí|учиться
+老师|lǎoshī|учитель
+学生|xuésheng|ученик
+朋友|péngyou|друг
+中国|Zhōngguó|Китай
+人|rén|человек
+北京|Běijīng|Пекин
+今天|jīntiān|сегодня
+明天|míngtiān|завтра
+天气|tiānqì|погода
+看|kàn|смотреть
+书|shū|книга
+电影|diànyǐng|фильм
+买|mǎi|покупать
+多少|duōshao|сколько
+钱|qián|деньги
+块|kuài|юань (разг.)
+很|hěn|очень
+大|dà|большой
+小|xiǎo|маленький
+的|de|(частица принадлежности)
+在|zài|находиться, в
+和|hé|и
+什么|shénme|что
+谁|shéi|кто
+哪儿|nǎr|где, куда
+请|qǐng|пожалуйста
+谢谢|xièxie|спасибо
+对不起|duìbuqǐ|извините
+说|shuō|говорить
+汉语|Hànyǔ|китайский язык
+想|xiǎng|хотеть, думать
+会|huì|уметь
+工作|gōngzuò|работать
+医生|yīshēng|врач
+猫|māo|кошка
+狗|gǒu|собака
+个|gè|(счётное слово)
+一|yī|один
+三|sān|три
+五|wǔ|пять
+十|shí|десять
+岁|suì|лет (возраст)
+点|diǎn|час (по часам)
+现在|xiànzài|сейчас
+住|zhù|жить
+叫|jiào|зваться
+名字|míngzi|имя
+爸爸|bàba|папа
+妈妈|māma|мама
+小明|Xiǎo Míng|Сяо Мин (имя)
+这|zhè|это
+那|nà|то, тот
+您|nín|Вы (вежл.)
+他们|tāmen|они
+你们|nǐmen|вы (мн.)
+几|jǐ|сколько (до 10)
+怎么|zěnme|как
+怎么样|zěnmeyàng|как (дела)
+为什么|wèishénme|почему
+哪|nǎ|какой
+呢|ne|а ты?, (частица)
+吧|ba|(частица предложения)
+了|le|(частица завершённости)
+二|èr|два
+两|liǎng|два (с сч. словом)
+四|sì|четыре
+六|liù|шесть
+七|qī|семь
+八|bā|восемь
+九|jiǔ|девять
+零|líng|ноль
+百|bǎi|сто
+千|qiān|тысяча
+第|dì|(порядковый №)
+年|nián|год
+月|yuè|месяц, луна
+号|hào|число, номер
+星期|xīngqī|неделя
+昨天|zuótiān|вчера
+早上|zǎoshang|утро
+上午|shàngwǔ|до полудня
+中午|zhōngwǔ|полдень
+下午|xiàwǔ|после полудня
+晚上|wǎnshang|вечер
+时候|shíhou|время, момент
+分钟|fēnzhōng|минута
+今年|jīnnián|в этом году
+明年|míngnián|в следующем году
+做|zuò|делать
+听|tīng|слушать
+读|dú|читать вслух
+写|xiě|писать
+画|huà|рисовать
+唱歌|chàng gē|петь
+跳舞|tiàowǔ|танцевать
+走|zǒu|идти пешком
+坐|zuò|сидеть, ехать на
+站|zhàn|стоять
+开|kāi|открывать
+关|guān|закрывать
+给|gěi|давать
+拿|ná|брать
+找|zhǎo|искать
+等|děng|ждать
+问|wèn|спрашивать
+回答|huídá|отвечать
+知道|zhīdào|знать
+认识|rènshi|быть знакомым
+觉得|juéde|считать
+要|yào|хотеть, нужно
+能|néng|мочь
+可以|kěyǐ|можно
+需要|xūyào|нуждаться
+开始|kāishǐ|начинать
+睡觉|shuìjiào|спать
+起床|qǐchuáng|вставать
+洗|xǐ|мыть
+穿|chuān|носить (одежду)
+玩|wán|играть, гулять
+打|dǎ|бить, играть (в)
+踢|tī|пинать
+游泳|yóuyǒng|плавать
+骑|qí|ехать верхом
+开车|kāi chē|водить машину
+到|dào|прибыть, до
+回|huí|возвращаться
+进|jìn|входить
+出|chū|выходить
+帮助|bāngzhù|помогать
+告诉|gàosu|сообщать
+希望|xīwàng|надеяться
+欢迎|huānyíng|приветствовать
+再见|zàijiàn|до свидания
+喂|wéi|алло
+孩子|háizi|ребёнок
+男|nán|мужской
+女|nǚ|женский
+儿子|érzi|сын
+女儿|nǚ'ér|дочь
+哥哥|gēge|старший брат
+姐姐|jiějie|старшая сестра
+弟弟|dìdi|младший брат
+妹妹|mèimei|младшая сестра
+同学|tóngxué|одноклассник
+先生|xiānsheng|господин
+小姐|xiǎojiě|госпожа, девушка
+国家|guójiā|страна
+城市|chéngshì|город
+上海|Shànghǎi|Шанхай
+医院|yīyuàn|больница
+商店|shāngdiàn|магазин
+饭馆|fànguǎn|ресторан
+公司|gōngsī|компания
+银行|yínháng|банк
+房间|fángjiān|комната
+桌子|zhuōzi|стол
+椅子|yǐzi|стул
+门|mén|дверь
+窗|chuāng|окно
+床|chuáng|кровать
+杯子|bēizi|стакан, чашка
+衣服|yīfu|одежда
+鞋|xié|обувь
+帽子|màozi|шапка
+手机|shǒujī|телефон
+电脑|diànnǎo|компьютер
+电视|diànshì|телевизор
+车|chē|машина
+飞机|fēijī|самолёт
+火车|huǒchē|поезд
+出租车|chūzūchē|такси
+地铁|dìtiě|метро
+公共汽车|gōnggòng qìchē|автобус
+路|lù|дорога
+东西|dōngxi|вещь
+事|shì|дело
+话|huà|слова, речь
+字|zì|иероглиф
+汉字|Hànzì|китайский иероглиф
+课|kè|урок
+问题|wèntí|вопрос, проблема
+电话|diànhuà|телефон (звонок)
+信|xìn|письмо
+票|piào|билет
+菜|cài|блюдо, овощи
+肉|ròu|мясо
+鱼|yú|рыба
+鸡蛋|jīdàn|яйцо
+牛奶|niúnǎi|молоко
+面条|miàntiáo|лапша
+面包|miànbāo|хлеб
+饭|fàn|еда, рис
+水果|shuǐguǒ|фрукты
+香蕉|xiāngjiāo|банан
+咖啡|kāfēi|кофе
+啤酒|píjiǔ|пиво
+酒|jiǔ|алкоголь
+碗|wǎn|миска
+早饭|zǎofàn|завтрак
+午饭|wǔfàn|обед
+晚饭|wǎnfàn|ужин
+手|shǒu|рука
+头|tóu|голова
+脸|liǎn|лицо
+眼睛|yǎnjing|глаза
+耳朵|ěrduo|ухо
+嘴|zuǐ|рот
+身体|shēntǐ|тело, здоровье
+脚|jiǎo|нога, ступня
+心|xīn|сердце
+天|tiān|небо, день
+太阳|tàiyáng|солнце
+月亮|yuèliang|луна
+雨|yǔ|дождь
+雪|xuě|снег
+风|fēng|ветер
+山|shān|гора
+河|hé|река
+海|hǎi|море
+花|huā|цветок
+树|shù|дерево
+多|duō|много
+少|shǎo|мало
+高|gāo|высокий
+矮|ǎi|низкий
+长|cháng|длинный
+短|duǎn|короткий
+新|xīn|новый
+旧|jiù|старый (о вещах)
+冷|lěng|холодный
+热|rè|горячий, жаркий
+忙|máng|занятой
+累|lèi|уставший
+快|kuài|быстрый
+慢|màn|медленный
+漂亮|piàoliang|красивый
+高兴|gāoxìng|рад
+好吃|hǎochī|вкусный
+好看|hǎokàn|красивый на вид
+好听|hǎotīng|приятный на слух
+难|nán|трудный
+容易|róngyì|лёгкий
+贵|guì|дорогой
+便宜|piányi|дешёвый
+远|yuǎn|далеко
+近|jìn|близко
+早|zǎo|рано
+晚|wǎn|поздно
+对|duì|верно
+错|cuò|неверно
+白|bái|белый
+黑|hēi|чёрный
+红|hóng|красный
+黄|huáng|жёлтый
+蓝|lán|синий
+绿|lǜ|зелёный
+都|dōu|все, всё
+太|tài|слишком
+真|zhēn|действительно
+非常|fēicháng|очень
+最|zuì|самый
+还|hái|ещё
+再|zài|снова
+就|jiù|уже, именно
+已经|yǐjīng|уже
+先|xiān|сначала
+一起|yìqǐ|вместе
+一下|yíxià|(немного, разок)
+一点儿|yìdiǎnr|немного
+别|bié|не надо
+从|cóng|от, из
+跟|gēn|с
+因为|yīnwèi|потому что
+所以|suǒyǐ|поэтому
+但是|dànshì|но
+如果|rúguǒ|если
+还是|háishi|или (в вопросе)
+没|méi|не (прош.)
+比|bǐ|чем, сравнивать
+里|lǐ|внутри
+上|shàng|сверху
+下|xià|снизу
+前面|qiánmian|впереди
+后面|hòumian|позади
+左|zuǒ|лево
+右|yòu|право
+旁边|pángbiān|рядом
+外|wài|снаружи
+东|dōng|восток
+南|nán|юг
+西|xī|запад
+北|běi|север
+本|běn|(сч. слово для книг)
+只|zhī|(сч. слово для животных)
+条|tiáo|(сч. слово: длинное)
+件|jiàn|(сч. слово: одежда, дела)
+张|zhāng|(сч. слово: плоское)
+些|xiē|несколько
+次|cì|раз
+请问|qǐngwèn|скажите, пожалуйста
+没关系|méi guānxi|ничего страшного
+不客气|bú kèqi|не за что
+晚安|wǎn'ān|спокойной ночи
+生日|shēngrì|день рождения
+快乐|kuàilè|счастливый
+美国|Měiguó|США
+英国|Yīngguó|Великобритания
+日本|Rìběn|Япония
+俄罗斯|Éluósī|Россия
+学|xué|учить
+考试|kǎoshì|экзамен
+家人|jiārén|члены семьи
+你好|nǐ hǎo|привет`;
+const W=WS.split("\n").map(l=>{const a=l.split("|");return{h:a[0],p:a[1],r:a[2]}});
+const D={};W.forEach(w=>D[w.h]=w);
+const SS=`我 是 学生|Я студент
+你 好 吗|Как дела?
+他 是 我 的 老师|Он мой учитель
+我 喜欢 喝 茶|Я люблю пить чай
+她 想 吃 苹果|Она хочет съесть яблоко
+我们 去 学校|Мы идём в школу
+今天 天气 很 好|Сегодня хорошая погода
+我 在 家 学习 汉语|Я дома учу китайский
+你 叫 什么 名字|Как тебя зовут?
+他 在 北京 工作|Он работает в Пекине
+我 买 三 个 苹果|Я покупаю три яблока
+苹果 多少 钱|Сколько стоит яблоко?
+一 个 苹果 五 块|Одно яблоко — пять юаней
+我 没有 钱|У меня нет денег
+明天 你 去 哪儿|Куда ты пойдёшь завтра?
+我 想 看 电影|Я хочу посмотреть фильм
+我 会 说 汉语|Я умею говорить по-китайски
+他 是 医生|Он врач
+我 有 一 个 朋友|У меня есть друг
+谁 是 你 的 老师|Кто твой учитель?
+现在 三 点|Сейчас три часа
+我 住 在 中国|Я живу в Китае
+她 十 岁|Ей десять лет
+请 喝 水|Пожалуйста, пейте воду
+我 爱 我 的 家|Я люблю свой дом
+我们 是 好 朋友|Мы хорошие друзья
+他 不 喝 茶|Он не пьёт чай
+妈妈 喜欢 小 狗|Мама любит маленькую собаку
+爸爸 不 在 家|Папы нет дома
+我 的 猫 很 大|Моя кошка очень большая
+她 是 我 的 妈妈|Она моя мама
+这 是 什么|Что это?
+那 是 我 的 书|То — моя книга
+你们 都 是 学生 吗|Вы все студенты?
+今天 星期 五|Сегодня пятница
+你 要 喝 咖啡 还是 茶|Ты будешь кофе или чай?
+我 非常 高兴|Я очень рад
+这 个 菜 很 好吃|Это блюдо очень вкусное
+他 有 两 个 孩子|У него двое детей
+我 的 手机 在 桌子 上|Мой телефон на столе
+请问 医院 在 哪儿|Скажите, где больница?
+我 想 坐 出租车 去 学校|Хочу поехать в школу на такси
+今天 很 冷|Сегодня очень холодно
+我 不 认识 他|Я его не знаю
+老师 再见|До свидания, учитель
+他们 在 看 电视|Они смотрят телевизор
+我 和 妈妈 去 商店 买 衣服|Мы с мамой идём в магазин за одеждой
+你 几 岁|Сколько тебе лет?
+爸爸 开车 去 公司|Папа едет на работу на машине
+苹果 很 便宜|Яблоки очень дешёвые
+我 有 一 本 汉语 书|У меня есть книга по китайскому`;
+const S=SS.split("\n").map(l=>{const a=l.split("|");return{t:a[0].split(" "),r:a[1]}});
+const ST=[
+{n:"1. Знакомство",t:"你好 ！ 我 叫 小明 。 我 是 学生 。 我 在 北京 学习 汉语 。 我 的 老师 是 中国 人 。 我 很 喜欢 我 的 学校 。",r:"Привет! Меня зовут Сяо Мин. Я студент. Я учу китайский в Пекине. Мой учитель — китаец. Мне очень нравится моя школа.",q:"Где учится Сяо Мин?",o:["В Пекине","Дома","В Китае, но не в Пекине","Он не учится"],a:0},
+{n:"2. Яблоки",t:"今天 天气 很 好 。 我 和 朋友 去 买 苹果 。 苹果 很 大 。 一 个 苹果 多少 钱 ？ 五 块 。 我 买 三 个 。 谢谢 ！",r:"Сегодня хорошая погода. Мы с другом идём покупать яблоки. Яблоки очень большие. Сколько стоит одно? Пять юаней. Я беру три. Спасибо!",q:"Сколько яблок купил рассказчик?",o:["Одно","Три","Пять","Десять"],a:1},
+{n:"3. Моя семья",t:"我 家 有 爸爸 、 妈妈 和 我 。 爸爸 是 医生 。 妈妈 是 老师 。 我们 有 一 个 狗 ， 狗 很 小 。 我 爱 我 的 家 。",r:"В моей семье папа, мама и я. Папа — врач. Мама — учитель. У нас есть собака, она очень маленькая. Я люблю свой дом.",q:"Кто мама?",o:["Врач","Ученица","Учитель","Китаянка"],a:2},
+{n:"4. Кино",t:"小明 ， 明天 你 去 哪儿 ？ 我 去 学校 。 你 想 看 电影 吗 ？ 想 ！ 我们 三 点 去 。 谢谢 你 ， 朋友 。",r:"Сяо Мин, куда ты завтра? Я в школу. Хочешь посмотреть фильм? Хочу! Пойдём в три часа. Спасибо тебе, друг.",q:"Во сколько они идут в кино?",o:["В пять","В десять","В три","Утром"],a:2},
+{n:"5. Чай и рис",t:"现在 三 点 。 我 在 家 。 我 想 喝 茶 ， 也 想 吃 米饭 。 妈妈 说 ： 请 喝 水 ！ 我 说 ： 谢谢 妈妈 ！",r:"Сейчас три часа. Я дома. Хочу пить чай и есть рис. Мама говорит: «Пожалуйста, пей воду!» Я говорю: «Спасибо, мама!»",q:"Что предложила мама?",o:["Чай","Рис","Воду","Яблоко"],a:2}];
+// "也" extra word
+D["也"]={h:"也",p:"yě",r:"тоже"};W.push(D["也"]);
+let P=true,view="cards",xp=0,streak=0,known={};
+try{known=JSON.parse(localStorage.getItem("k")||"{}");xp=+localStorage.getItem("xp")||0}catch(e){}
+const save=()=>{try{localStorage.setItem("k",JSON.stringify(known));localStorage.setItem("xp",xp)}catch(e){}};
+const $=s=>document.querySelector(s),sh=a=>[...a].sort(()=>Math.random()-.5);
+let VO=null,SR=.85,VOICES=[],nvShown=0;
+function loadV(){try{VOICES=speechSynthesis.getVoices().filter(v=>/zh|cmn|yue/i.test(v.lang+v.name));const pr=["Xiaoxiao","Yunxi","Google 普通话","Tingting","Ting-Ting","Huihui","Mei-Jia","Microsoft","Google"];let sv="";try{sv=localStorage.getItem("vo")}catch(e){}VO=VOICES.find(v=>v.name===sv)||pr.map(p=>VOICES.find(v=>v.name.includes(p)&&/zh-CN|cmn/i.test(v.lang))).find(Boolean)||VOICES.find(v=>/zh-CN|cmn-Hans/i.test(v.lang))||VOICES[0]||null}catch(e){}}
+try{speechSynthesis.onvoiceschanged=loadV;loadV()}catch(e){}
+function noVoice(){if(nvShown)return;nvShown=1;const t=$("#tip");t.innerHTML="🔇 Китайский голос не найден. Открой вкладку «🔊 Голос» — там подсказки.";t.style.display="block";setTimeout(()=>t.style.display="none",6000)}
+function say(t,r){try{if(!t)return;const sy=speechSynthesis;if(!VO)loadV();sy.cancel();if(sy.resume)sy.resume();const u=new SpeechSynthesisUtterance(t);u.lang="zh-CN";if(VO)u.voice=VO;u.rate=r||SR;u.pitch=1.05;u.volume=1;setTimeout(()=>sy.speak(u),80);if(!VO&&!VOICES.length)noVoice()}catch(e){noVoice()}}
+let AC;function fx(ok){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.connect(g);g.connect(AC.destination);o.type="triangle";o.frequency.setValueAtTime(ok?660:200,t);if(ok)o.frequency.setValueAtTime(880,t+.1);g.gain.setValueAtTime(.15,t);g.gain.exponentialRampToValueAtTime(.001,t+.3);o.start(t);o.stop(t+.3)}catch(e){}}
+let TM,TON=true;
+function timer(){clearInterval(TM);if(!TON)return;const c=document.querySelector("#app .card");if(!c)return;c.insertAdjacentHTML("afterbegin",'<div class="tb"><i></i></div>');const b=c.querySelector(".tb i");let t=0;TM=setInterval(()=>{t+=.1;b.style.width=(100-t/12*100)+"%";if(t>=12){clearInterval(TM);timeout()}},100)}
+function timeout(){if(lock||!document.querySelector(".opt"))return;const b=[...document.querySelectorAll(".opt")].find(e=>e.textContent!=Q[qi].a);pickA(b,"__t")}
+function voice(){loadV();$("#app").innerHTML=cmh("Настроим голос! Если звука нет — выбери другой голос, проверь громкость и беззвучный режим.")+`<div class="card"><p><b>Голос</b></p><select style="width:100%;padding:10px;font-size:16px" onchange="setV(this.value)">${VOICES.length?VOICES.map(v=>`<option ${VO&&VO.name==v.name?"selected":""}>${v.name} (${v.lang})</option>`).join(""):"<option>Китайских голосов не найдено</option>"}</select><p>Скорость: <b id="rv">${SR}</b></p><input type="range" min=".5" max="1.2" step=".05" value="${SR}" style="width:100%" oninput="SR=+this.value;document.getElementById('rv').textContent=SR"><div class="row"><button class="btn p" onclick="say('你好！我是你的汉语老师。')">🔊 Проверить голос</button><button class="btn" onclick="fx(1)">🔔 Звук эффектов</button></div></div><div class="card mu" style="font-size:14px"><b>Нет китайского голоса?</b><br>📱 Android: Настройки → Язык → Синтез речи (Google) → Установить голосовые данные → Китайский.<br>🍎 iPhone: Настройки → Универсальный доступ → Речь → Голоса → Китайский. Выключи беззвучный режим.<br>🪟 Windows: Параметры → Время и язык → Речь → добавить китайский. В Edge есть голоса Xiaoxiao и Yunxi.<br>💻 Mac: Универсальный доступ → Речевой контент → Голоса системы → Tingting.<br>После установки обнови страницу.</div>`}
+function setV(v){const n=v.replace(/ \(.*\)$/,"");VO=VOICES.find(x=>x.name==n)||VO;try{localStorage.setItem("vo",n)}catch(e){}say("你好，很高兴认识你")}
+function hz(t){const d=D[t];return d?`<span class="w" data-t="${t}">${P?`<ruby>${t}<rt>${d.p}</rt></ruby>`:t}</span>`:t}
+document.addEventListener("click",e=>{const w=e.target.closest(".w");if(!w)return;const d=D[w.dataset.t],t=$("#tip");clearTimeout(window._t);const fs=d.h.length>1?Math.floor(124/d.h.length):100;t.innerHTML=`<div class="tp2"><button class="x" onclick="document.getElementById('tip').style.display='none'">✕</button><div class="gridbox"><i class="gl"></i><span class="gc" style="font-size:${fs}px">${d.h}</span><canvas id="cv" width="220" height="220"></canvas></div><div class="tinfo"><b class="tpy">${d.p}</b><span class="trs">${d.r}</span><div class="tbt"><button class="sw" onclick="say('${d.h}')">🔊</button><button class="sw" onclick="clrCv()">🧽 Стереть</button><button class="sw" onclick="wd('${d.h}')">ⓘ Ещё</button></div><small>Обведи иероглиф пальцем 👆</small></div></div>`;initCv();t.style.display="block";say(d.h)});
+function initCv(){const c=$("#cv"),x=c.getContext("2d");let on=0;const P=e=>{const r=c.getBoundingClientRect();return[(e.clientX-r.left)*c.width/r.width,(e.clientY-r.top)*c.height/r.height]};x.lineWidth=11;x.lineCap=x.lineJoin="round";x.strokeStyle="#ff3d77";c.style.touchAction="none";c.onpointerdown=e=>{on=1;c.setPointerCapture(e.pointerId);const[a,b]=P(e);x.beginPath();x.moveTo(a,b);x.lineTo(a+.1,b);x.stroke()};c.onpointermove=e=>{if(!on)return;const[a,b]=P(e);x.lineTo(a,b);x.stroke()};c.onpointerup=c.onpointercancel=()=>on=0}
+function clrCv(){const c=$("#cv");c&&c.getContext("2d").clearRect(0,0,c.width,c.height)}
+const TABS=[["path","🗺️ Путь"],["cards","Карточки"],["trans","Перевод"],["gap","Пропуски"],["build","Составь фразу"],["listen","Аудио"],["read","Рассказы"],["exam","Экзамен"],["voice","🔊 Голос"]];
+const MAIN=[["home","🏠","Главная"],["path","🗺️","Путь"],["book","📕","Книга"],["read","📚","Истории"],["more","⚙️","Ещё"]];
+const GR={trans:"home",gap:"home",build:"home",listen:"home",exam:"home",pin:"home",phr:"home",tr:"home",ah:"home",ac:"home",hub:"home",rev:"home",favs:"home",fcd:"home",fcz:"home",fcr:"home",report:"home",lab:"home",voice:"more",cards:"path"};
+function bkb(){if(LCB){clearInterval(TM);LCB=null;POOL=W;go(view);return}back()}
+function nav(){$("#bk").style.display=view=="home"?"none":"flex";const a=GR[view]||view;$("#nav").innerHTML=MAIN.map(t=>`<button class="${a==t[0]?"on":""}" onclick="go('${t[0]}')"><span>${t[1]}</span>${t[2]}</button>`).join("");$("#st").innerHTML=`<span class="pl2">Ур. ${Math.floor(xp/100)+1}</span><span class="pl2">💎 ${xp}</span><span class="pl2">🔥 ${streak}</span><div class="xb"><i style="width:${xp%100}%"></i></div>`}
+function go(v){$("#tip").style.display="none";if(!bk&&view!==v){if(MAIN.some(m=>m[0]==v))H=[];else{H.push(view);if(H.length>25)H.shift()}}bk=0;view=v;nav();clearInterval(TM);LCB=null;POOL=W;({path,voice,hub,more,cards,trans:()=>quiz(["t"],10),gap:()=>quiz(["g"],10),build,listen:()=>quiz(["l"],10),read:stories,book,report,lab,home,rev,favs,tr,ah:()=>quiz(["a"],10),ac:()=>quiz(["c"],10),fcd:()=>fc("z",dueList().length?dueList():null),fcz:()=>fc("z"),fcr:()=>fc("r"),pin:()=>quiz(["p"],10),phr:()=>quiz(["m"],10),exam:()=>quiz(["t","g","l","r"],20)})[v]();}
+// cards
+let deck=[],ci=0,flip=false;
+function cards(){deck=sh(W);ci=0;flip=false;card()}
+function card(){const w=deck[ci];if(!flip)say(w.h);$("#app").innerHTML=`<div class="bar"><i style="width:${ci/deck.length*100}%"></i></div><div class="card c" onclick="flip=!flip;card()"><div class="big">${w.h}</div>${flip?`<p style="font-size:22px;margin:4px">${w.p}</p><p style="font-size:20px;margin:4px">${w.r}</p>`:`<p class="mu">нажми, чтобы перевернуть</p>`}</div><div class="row"><button class="btn" onclick="say('${w.h}')">🔊</button><button class="btn" onclick="nxt(0)">Повторить</button><button class="btn p" onclick="nxt(1)">Знаю ✓</button></div><p class="c mu">${ci+1} / ${deck.length}</p>`}
+function nxt(k){if(k){known[deck[ci].h]=1;xp+=2}else delete known[deck[ci].h];save();ci++;flip=false;if(ci>=deck.length){nav();if(LCB)return lcb();return $("#app").innerHTML=`<div class="card c"><div class="big">🎉</div><p>Колода пройдена!</p><button class="btn p" onclick="cards()">Ещё раз</button></div>`}nav();card()}
+// quiz
+function others(h,n){return sh(W.filter(w=>w.h!=h)).slice(0,n)}
+function mkQ(k){
+ if(k=="a"||k=="c"){const t=sh(S)[0],o=sh([t,...sh(S.filter(x=>x!=t)).slice(0,3)]),c=k=="c";return{key:t.t.find(x=>D[x]),big:c?"👂":"🔊",sub:c?"Какую фразу ты услышал?":"Послушай фразу и выбери перевод",o:o.map(x=>c?x.t.join(""):x.r),a:c?t.t.join(""):t.r,say:t.t.join(""),auto:1,full:t.t}}
+ if(k=="p"){const w=sh(POOL)[0];return{key:w.h,big:w.h,sub:"Выбери пиньинь",o:sh([w,...others(w.h,3)]).map(x=>x.p).filter((v,i,a)=>a.indexOf(v)==i),a:w.p,say:w.h}}
+ if(k=="m"){const t=sh(S)[0],o=sh([t,...sh(S.filter(x=>x!=t)).slice(0,3)]);return{key:t.t.find(x=>D[x]),sent:t.t,sub:"Выбери перевод",o:o.map(x=>x.r),a:t.r,say:t.t.join(""),full:t.t}}
+ if(k=="t"){const w=sh(POOL)[0],rev=Math.random()<.4;const o=sh([w,...others(w.h,3)]);return rev?{key:w.h,big:w.r,sub:"Как это по-китайски?",o:o.map(x=>x.h),a:w.h,say:0}:{key:w.h,big:w.h,sub:w.p,o:o.map(x=>x.r),a:w.r,say:w.h}}
+ if(k=="l"){const w=sh(POOL)[0];return{key:w.h,big:"🔊",sub:"Послушай и выбери иероглифы",o:sh([w,...others(w.h,3)]).map(x=>x.h),a:w.h,say:w.h,auto:1}}
+ const pc=S.filter(x=>x.t.some(t=>POOL.some(p=>p.h==t)));const s=sh(pc.length&&POOL!==W?pc:S)[0];let idx=s.t.map((t,i)=>i).filter(i=>D[s.t[i]]);const pi=idx.filter(i=>POOL.some(p=>p.h==s.t[i]));if(pi.length&&POOL!==W)idx=pi;const i=idx[Math.floor(Math.random()*idx.length)];const w=s.t[i];
+ return{key:w,sent:s.t.map((t,j)=>j==i?"＿＿":t),sub:s.r,o:sh([D[w],...others(w,3)]).map(x=>x.h),a:w,say:s.t.join(""),full:s.t}}
+let Q=[],qi=0,sc=0,lock=0;
+function quiz(kinds,n){Q=[];for(let i=0;i<n;i++){let k=kinds[i%kinds.length];{const o=mkQ(k=="r"?"g":k);o.ty=k=="r"?"g":k;Q.push(o)}}qi=0;sc=0;q()}
+function q(){lock=0;const x=Q[qi];$("#app").innerHTML=`<div class="bar"><i style="width:${qi/Q.length*100}%"></i></div><div class="qh"><span>Вопрос ${qi+1} из ${Q.length}</span><button class="x" onclick="quit()">✕</button></div><div class="card">${x.sent?`<div class="sent">${x.sent.map(hz).join(" ")}</div>`:`<div class="${/[\u4e00-\u9fff]/.test(x.big)?"big":"big"}" style="${x.big.length>4?"font-size:30px":""}">${x.big}</div>`}<p class="c mu">${x.sub}</p><div class="opts">${x.o.map(o=>`<button class="opt" onclick="pickA(this,'${o}')">${o}</button>`).join("")}</div><div class="row"><button class="btn" onclick="say('${x.say||x.a}')">🔊</button></div><div id="fb" class="c"></div></div>`;if(x.auto||(x.say&&!x.sent))say(x.say);timer()}
+function pickA(b,o){if(lock)return;lock=1;clearInterval(TM);const x=Q[qi],ok=o==x.a;document.querySelectorAll(".opt").forEach(e=>{if(e.textContent==x.a)e.classList.add("ok")});if(!ok)b.classList.add("bad");if(ok){sc++;streak++;xp+=3+Math.min(streak,10)}else streak=0;track(x.key,ok,x.ty);fx(ok);save();nav();if(x.full)say(x.full.join(""));else say(x.say||x.a);$("#fb").innerHTML=`<p>${ok?"✅ "+rp()+(streak>2?" 🔥 Комбо ×"+streak:""):"❌ Ничего, это шаг к мастерству! Правильно: <b>"+x.a+"</b>"}</p><button class="btn p" onclick="qnext()">Дальше →</button>`}
+function qnext(){clearInterval(TM);qi++;if(qi>=Q.length){T.tn=(T.tn||0)+1;if(sc/Q.length>=.6)T.tp=(T.tp||0)+1;sp();if(LCB){const f=LCB;LCB=null;return f(sc/Q.length)}const p=Math.round(sc/Q.length*100);return $("#app").innerHTML=`<div class="card c"><div class="big">${p>=80?"🏆":"💪"}</div><h2>${sc} / ${Q.length} (${p}%)</h2><p>${p>=80?"Отлично, ты готов к HSK 1!":"Повтори слова и попробуй снова — нужно 80%+."}</p><button class="btn p" onclick="go(view)">Ещё раз</button></div>`}q()}
+// build
+let cur,pool,built;
+function build(){cur=sh(S)[0];pool=sh(cur.t.map((t,i)=>({t,i})));built=[];bdraw()}
+function bdraw(){$("#app").innerHTML=`<div class="card c"><p class="mu">Составь по-китайски:</p><h3 style="margin:4px">${cur.r}</h3><div class="ans">${built.map((b,k)=>`<span class="tok" onclick="unb(${k})">${b.t}</span>`).join("")}</div><div>${pool.map((b,k)=>`<span class="tok" onclick="add(${k})">${b.t}</span>`).join("")}</div><div class="row"><button class="btn" onclick="say('${cur.t.join("")}')">🔊</button><button class="btn p" onclick="chk()">Проверить</button><button class="btn" onclick="build()">Другая</button></div><div id="fb"></div></div>`}
+function add(k){built.push(pool.splice(k,1)[0]);bdraw()}
+function unb(k){pool.push(built.splice(k,1)[0]);bdraw()}
+function chk(){const ok=built.map(b=>b.t).join(" ")==cur.t.join(" ");if(ok){xp+=5;streak++;say(cur.t.join(""))}else streak=0;save();nav();$("#fb").innerHTML=ok?`<p>✅ Верно!</p><div class="sent">${cur.t.map(hz).join(" ")}</div><button class="btn p" onclick="build()">Дальше →</button>`:`<p>❌ Не совсем. Подсказка: <b>${cur.t.join(" ")}</b></p>`}
+// reader
+const LMS=[`<path d="M6 40 34 27 58 37 30 51Z" fill="#f1d9a8"/><path d="M6 40 30 51v8L6 48Z" fill="#c9a06a"/><path d="M30 51 58 37v8L30 59Z" fill="#a67c4c"/><rect x="14" y="30" width="9" height="12" fill="#b98a55"/><path d="M12 30h13l-2-6H14Z" fill="#d6453d"/><rect x="42" y="25" width="9" height="12" fill="#b98a55"/><path d="M40 25h13l-2-6H42Z" fill="#d6453d"/>`,
+`<path d="M32 4 40 14H24Z" fill="#d6453d"/><rect x="26" y="14" width="12" height="9" fill="#f6e3b4"/><path d="M32 18 46 28H18Z" fill="#e0574a"/><rect x="24" y="28" width="16" height="10" fill="#f6e3b4"/><path d="M32 32 52 44H12Z" fill="#c63a35"/><rect x="21" y="44" width="22" height="11" fill="#f6e3b4"/><path d="M32 49 58 60H6Z" fill="#a82d2d"/>`,
+`<rect x="12" y="34" width="40" height="22" fill="#f6e3b4"/><rect x="16" y="36" width="5" height="20" fill="#d6453d"/><rect x="43" y="36" width="5" height="20" fill="#d6453d"/><rect x="26" y="42" width="12" height="14" fill="#8a2a24"/><path d="M4 36Q32 28 60 36L52 24H12Z" fill="#c63a35"/><path d="M12 24Q32 14 52 24L32 8Z" fill="#e0574a"/>`,
+`<rect x="30" y="14" width="4" height="40" fill="#cfd6e6"/><circle cx="32" cy="42" r="10" fill="#ff7ab8"/><circle cx="32" cy="24" r="7" fill="#ff9ad0"/><circle cx="32" cy="9" r="4" fill="#ff5fa8"/><path d="M20 58 32 40 44 58Z" fill="#aab4cc" opacity=".8"/>`,
+`<rect x="8" y="30" width="14" height="28" fill="#5b7bd8"/><rect x="24" y="14" width="14" height="44" fill="#7a5cf0"/><rect x="40" y="26" width="14" height="32" fill="#3fa7e8"/><path d="M12 36h6M12 42h6M12 48h6M28 20h6M28 28h6M28 36h6M28 44h6M44 32h6M44 40h6M44 48h6" stroke="#fff" stroke-opacity=".7" stroke-width="2"/>`,
+`<rect x="12" y="24" width="7" height="32" fill="#d6453d"/><rect x="45" y="24" width="7" height="32" fill="#d6453d"/><rect x="8" y="22" width="48" height="6" fill="#a82d2d"/><path d="M4 22Q32 12 60 22L32 8Z" fill="#e0574a"/><rect x="24" y="30" width="16" height="6" fill="#f2c14e"/>`];
+const WLD=[["🎋","Бамбуковая роща"],["🍵","Чайные террасы"],["⛰️","Нефритовые горы"],["🏮","Город фонарей"],["🐉","Долина драконов"],["🏯","Золотой дворец"]];
+function wod(){const w=W[(new Date().getDate()*7+new Date().getMonth()*3)%W.length];return `<div class="card wod"><small class="mu">✨ Слово дня</small><div class="row" style="justify-content:space-between;margin:4px 0 0"><span class="w big3" data-t="${w.h}">${w.h}</span><div style="flex:1;padding-left:14px"><b>${w.p}</b><br>${w.r}</div><button class="btn" onclick="say('${w.h}')">🔊</button></div></div>`}
+let TRV=0;
+function reader(i,r){if(!r)H.push(view);CURF=()=>reader(i,1);const s=ST[i];$("#app").innerHTML=`<div class="card"><h3 style="margin:0 0 10px">${s.n} ${lv(i)}</h3><div class="row" style="margin:0 0 10px;justify-content:flex-start"><button class="btn tg ${P?"on":""}" onclick="P=!P;reader(${i},1)">拼 Пиньинь</button><button class="btn tg ${TRV?"on":""}" onclick="TRV=!TRV;reader(${i},1)">文 Перевод</button><button class="btn" onclick="say('${s.t.replace(/ /g,"")}')">🔊 Слушать</button></div><div class="story">${s.t.split(" ").map(hz).join(" ")}</div>${TRV?`<p class="trn">${s.r}</p>`:""}<p class="mu c">Нажми на слово — появится подсказка</p><b>Слова истории:</b><div>${need(s).map(h=>`<span class="w chip2" data-t="${h}">${h}</span>`).join("")}</div><div class="row"><button class="btn" onclick="mt(${i})">📝 Мини-тест</button></div><p><b>${s.q}</b></p><div class="opts">${s.o.map((o,k)=>`<button class="opt" onclick="rq(this,${k},${i})">${o}</button>`).join("")}</div></div>`}
+function rq(b,k,i){const ok=k==ST[i].a;b.classList.add(ok?"ok":"bad");if(ok){xp+=5;T.rd=T.rd||{};T.rd[i]=1;sp();save();nav()}}
+let POOL=W,LCB=null,pace=0,prog={},T={q:0,ok:0,miss:{},hit:{},days:[],cur:null,last:0};
+try{pace=+localStorage.getItem("pace")||0;prog=JSON.parse(localStorage.getItem("pg")||"{}");T=Object.assign(T,JSON.parse(localStorage.getItem("tr")||"{}"))}catch(e){}
+const prevLast=T.last;T.last=Date.now();
+const sp=()=>{try{localStorage.setItem("pace",pace);localStorage.setItem("pg",JSON.stringify(prog));localStorage.setItem("tr",JSON.stringify(T))}catch(e){}};
+const today=()=>new Date().toISOString().slice(0,10);
+function mark(){if(!T.days.includes(today()))T.days.push(today())}
+function dstreak(){let n=0,d=new Date();if(!T.days.includes(today()))d.setDate(d.getDate()-1);while(T.days.includes(d.toISOString().slice(0,10))){n++;d.setDate(d.getDate()-1)}return n}
+function track(k,ok,ty){if(!k)return;srsUp(k,ok);if(ty){T.ty=T.ty||{};const o=T.ty[ty]||(T.ty[ty]={q:0,ok:0});o.q++;if(ok)o.ok++}T.q++;if(ok){T.ok++;T.hit[k]=(T.hit[k]||0)+1}else T.miss[k]=(T.miss[k]||0)+1;mark();sp()}
+const weak=()=>Object.keys(T.miss).filter(k=>D[k]&&T.miss[k]>(T.hit[k]||0)).sort((a,b)=>T.miss[b]-T.miss[a]);
+const ND=()=>Math.ceil(W.length/pace),dw=d=>W.slice((d-1)*pace,d*pace);
+function lcb(x){const f=LCB;LCB=null;f&&f(x)}
+function unl(){let d=1;while(prog[d])d++;return d}
+const CO={panda:["🧭","Наставник"],dragon:["⚡","Тренер"],fox:["💡","Гид"],tiger:["🏆","Босс-мастер"]};
+const cmh=(m,k)=>{const c=CO[k||"panda"];return `<div class="coach"><div class="av">${c[0]}</div><div class="bub"><small>${c[1]}</small>${m}</div></div>`};
+function cm(m){const k=/БОСС/.test(m)?"tiger":/Бой|Работа над/.test(m)?"dragon":/Пропущ|читать/.test(m)?"fox":"panda";$("#app").insertAdjacentHTML("afterbegin",cmh(m,k))}
+function confetti(){const E=["🎉","💎","🌸","🏮","✨"];let h="";for(let i=0;i<24;i++)h+=`<span style="left:${Math.random()*100}%;animation-delay:${Math.random()*.6}s">${E[Math.floor(Math.random()*5)]}</span>`;const e=document.createElement("div");e.className="conf";e.innerHTML=h;document.body.appendChild(e);setTimeout(()=>e.remove(),3000)}
+function setPace(p){pace=p;sp();path()}
+function path(){
+ LCB=null;POOL=W;
+ if(!pace){$("#app").innerHTML=cmh("Привет! Я <b>Наставник</b> 🧭. Проведу тебя по карте к HSK 1. Выбери темп:")+`<div class="opts" style="grid-template-columns:1fr">`+[[20,"⚡ Турбо"],[12,"🚀 Интенсив"],[8,"🌿 Спокойно"]].map(x=>`<button class="btn p" onclick="setPace(${x[0]})">${x[1]} — ${x[0]} слов/день (${Math.ceil(W.length/x[0])} дн.)</button>`).join("")+`</div>`;return}
+ const n=ND(),c=unl(),done=Object.keys(prog).length,rs=T.cur&&!prog[T.cur.d],gap=prevLast?Math.floor((Date.now()-prevLast)/864e5):0,lost=gap>1?`Тебя не было ${gap} дн. — `:"",pct=Math.round(done/n*100),CS=[["🧭","Слова"],["🐉","Бой"],["🦊","Фразы"],["🐯","Босс"]];let t="";
+ for(let d=n;d>=1;d--){const st=prog[d]?"done":d==c?"cur":"lock";
+  const bs=d%5==0;t+=`${d%7==0?`<div class="wld"><span>${WLD[(d/7-1)%6][0]} Мир ${d/7} · ${WLD[(d/7-1)%6][1]}</span></div>`:""}<div class="rw3" style="--o:${[2,30,54,26][d%4]}%"><button class="nd ${st}${bs?" boss":""}" ${st=="lock"?"disabled":`onclick="startDay(${d})"`} aria-label="День ${d}"><i class="foam"></i><i class="isl"></i><svg class="lm" viewBox="0 0 64 64">${LMS[d%6]}</svg><b class="bn">${st=="done"?"✓":d}</b>${bs?'<span class="cr">👑</span>':""}${st=="cur"?'<span class="me">📍</span>':""}</button></div>`}
+ const msg=rs?`С возвращением! ${lost}Ты остановился на <b>дне ${T.cur.d}</b>, шаг «${T.cur.n}». Продолжим!`:c>n?"🎉 Ты построил весь город знаний! Иди на «Экзамен» — ты готов!":!T.q?`День <b>${c}</b> из ${n}. Начинаем строить твой путь! Каждый из нас ведёт свой этап.`:`${lost||"Рад тебя видеть! "+rp()+" "}Следующая постройка — <b>день ${c}</b>.`;
+ const btn=rs?`<button class="btn p big2" onclick="startDay(${T.cur.d},${T.cur.i})">▶ Продолжить: день ${T.cur.d} — ${T.cur.n}</button>`:c<=n?`<button class="btn p big2" onclick="startDay(${c})">▶ Начать день ${c}</button>`:"";
+ $("#app").innerHTML=cmh(msg)+`<div class="row">${btn}</div><div class="card pr"><b>🎓 Путь к HSK 1: ${pct}%</b><div class="bar" style="height:14px"><i style="width:${pct}%"></i></div><div class="mu">Дней: ${done}/${n} · слов выучено: ${learnedSet().size}/${W.length}<br>Осталось примерно <b>${Math.max(0,n-done)} дн.</b> ${done<n?"(темп "+pace+" слов/день)":"🏆"}</div><div class="row"><button class="btn" onclick="go('report')">📊 Отчёт</button><button class="btn" onclick="go('lab')">🧪 Слабые слова</button></div></div><div class="gate gold ${done<n?"dim":""}">🏯<b>Императорский дворец HSK 1</b><span>${n} дней · ${W.length} слов · финал!</span></div><div class="map">${t}</div><div class="gate">⛩️<b>Ворота обучения</b><span>Здесь начался твой путь. Сделай первый шаг!</span></div><p class="c mu"><a href="#" onclick="pace=0;sp();path();return false">сменить темп</a></p>`}
+function drill(){const ws=weak().slice(0,10).map(k=>D[k]);POOL=ws;LCB=r=>{POOL=W;mark();sp();$("#app").innerHTML=cmh(r>=.8?"Отлично, слабые места подтягиваются! 💪":"Ещё немного повторения — и эти слова станут твоими.")+`<div class="row"><button class="btn p" onclick="path()">🗺️ К карте</button></div>`};quiz(["t","p","l","g","m","t"],12);cm("🎯 <b>Работа над ошибками.</b> Здесь слова, в которых ты ошибался чаще всего.")}
+function startDay(d,from){
+ const ws=dw(d),learned=W.slice(0,d*pace),NM=["📖 Карточки","⚔️ Бой со словами","🧩 Пропуски"];let i=(from||0)-1,rx="";
+ const L=[
+ ()=>{deck=sh(ws);ci=0;flip=false;LCB=nx;card();cm(`📖 <b>День ${d}: новые слова.</b> Переверни карточку, нажми 🔊 и повтори вслух. «Знаю» — если запомнил!`)},
+ ()=>{POOL=ws;LCB=nxr;quiz(["t","l","p","t"],12);cm(rx+"⚔️ <b>Бой со словами!</b> Выбери правильный ответ. Ошибки я запоминаю и помогу их исправить.")},
+ ()=>{POOL=ws;LCB=nxr;quiz(["g","g","m"],8);cm(rx+"🧩 <b>Пропущенные иероглифы.</b> Вставь слово в предложение. Нажимай на слова — увидишь перевод.")}];
+ if(d%5==0){NM.push("📚 Рассказ");L.push(()=>{LCB=nx;reader((d/5-1)%ST.length);$("#app").insertAdjacentHTML("beforeend",`<div class="row"><button class="btn p" onclick="lcb()">Дальше →</button></div>`);cm(rx+"📚 <b>Время читать!</b> Прочитай рассказ, ответь на вопрос и жми «Дальше».")})}
+ NM.push("👹 Босс");L.push(()=>{POOL=learned;LCB=fin;quiz(["t","g","l","m","p","g"],14);cm(rx+"👹 <b>БОСС ДНЯ!</b> Повторение всех пройденных слов. Нужно 60%+, чтобы открыть следующий день.")});
+ function nx(){i++;T.cur={d,i,n:NM[i]};mark();sp();L[i]()}
+ function nxr(r){rx=r>=.9?"🔥 Супер, почти без ошибок! ":r>=.7?"👍 Хорошо! ":"🙂 Были ошибки — я их запомнил и вернусь к ним. ";nx()}
+ function fin(r){POOL=W;const pct=Math.round(r*100),s=r>=.9?3:r>=.75?2:r>=.6?1:0;
+  if(s){prog[d]=Math.max(prog[d]||0,s);T.cur=null;xp+=30*s;sp();save();nav();confetti();
+   $("#app").innerHTML=`<div class="card c win"><div class="big">${"💎".repeat(s)}</div><h2>День ${d} пройден! ${pct}%</h2><p>${rp()}</p><p>+${30*s} XP</p></div>`+cmh(s==3?"Великолепно! Ты настоящий мастер! 🔥":s==2?"Отлично! Вечером повтори слова ещё раз — и завтра будет легче.":"Пройдено! Но слабые места стоит повторить. Перепройди день ради 💎💎💎.")+`<div class="row"><button class="btn p" onclick="path()">🗺️ К карте</button></div>`}
+  else $("#app").innerHTML=cmh(`Результат ${pct}%. Нужно хотя бы 60%. Ничего страшного — повторим слова и снова на босса! 💪`)+`<div class="row"><button class="btn p" onclick="startDay(${d})">🔁 Повторить день</button><button class="btn" onclick="path()">🗺️ К карте</button></div>`}
+ nx()}
+try{const th=localStorage.getItem("th");if(th&&th!="auto")document.documentElement.setAttribute("data-theme",th)}catch(e){}
+function quit(){clearInterval(TM);LCB=null;POOL=W;go(["trans","gap","listen","exam","pin","phr","ah","ac"].includes(view)?"hub":view)}
+function hub(){const X=[["trans","⚔️","Перевод","Иероглиф ↔ русский","#ff8a5c,#e63e6d"],["gap","🧩","Пропуски","Вставь иероглиф","#7c4dff,#3fa7ff"],["build","🔤","Составь фразу","Собери предложение","#43c59e,#2e8b57"],["listen","🎧","Аудио","Слушай и выбирай","#ffb347,#ff5e62"],["tr","✍️","Переводчик","Русский → китайский","#b3122a,#8a4fff"],["ah","🎧","Аудирование","Фраза → перевод","#43c59e,#5b8def"],["ac","👂","Что я услышал?","Выбери фразу","#f0a830,#2e8b57"],["pin","🔠","Пиньинь","Выбери произношение","#e8452c,#f0a830"],["phr","💬","Перевод фраз","Понимай предложения","#5b8def,#43c59e"],["exam","📝","Экзамен","20 вопросов, цель — 80%","#5b4bff,#b14dff"]];
+$("#app").innerHTML=cmh("Выбирай режим — тренируемся на всех словах. Чем больше практики, тем увереннее экзамен! 💪")+`<div class="hub">${X.map(x=>`<button class="ht" style="background:linear-gradient(135deg,${x[4]})" onclick="go('${x[0]}')"><span>${x[1]}</span><b>${x[2]}</b>${x[3]}</button>`).join("")}</div>`}
+const srow=(l,c)=>`<div class="srow"><span>${l}</span>${c}</div>`;
+function setTh(v){try{localStorage.setItem("th",v)}catch(e){}v=="auto"?document.documentElement.removeAttribute("data-theme"):document.documentElement.setAttribute("data-theme",v);more()}
+function more(){more0();$("#app").insertAdjacentHTML("beforeend",'<div class="card auth"><div class="ph"><img src="data:image/jpeg;base64,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" alt="Sadykov Marsel"></div><small>Автор приложения</small><b>Sadykov Marsel</b><a class="ig" href="https://instagram.com/sadykov.350" target="_blank" rel="noopener">📸 @sadykov.350</a></div>')}
+function more0(){let th="auto";try{th=localStorage.getItem("th")||"auto"}catch(e){}
+$("#app").innerHTML=`<div class="card"><h3 style="margin:0 0 4px">⚙️ Настройки</h3>`+srow("Пиньинь над иероглифами",`<button class="sw ${P?"on":""}" onclick="P=!P;more()">${P?"Вкл":"Выкл"}</button>`)+srow("Таймер 12 сек на вопрос",`<button class="sw ${TON?"on":""}" onclick="TON=!TON;more()">${TON?"Вкл":"Выкл"}</button>`)+srow("Тема",`<span>${[["auto","Авто"],["light","☀️"],["dark","🌙"]].map(x=>`<button class="sw ${th==x[0]?"on":""}" onclick="setTh('${x[0]}')">${x[1]}</button>`).join(" ")}</span>`)+srow("Голос и скорость",`<button class="sw" onclick="go('voice')">Открыть</button>`)+srow("Темп обучения",`<button class="sw" onclick="pace=0;sp();go('path')">Сменить</button>`)+srow("Весь прогресс",`<button class="sw" id="rs" onclick="rst()">Сбросить</button>`)+`</div><p class="c mu">HSK 1 · 汉语 · ${W.length} слов</p>`}
+function rst(){const b=$("#rs");if(!window._r){window._r=1;b.textContent="Точно? Нажми ещё раз";setTimeout(()=>{window._r=0;if(b)b.textContent="Сбросить"},3000);return}
+window._r=0;try{localStorage.clear()}catch(e){}known={};xp=0;streak=0;prog={};pace=0;T={q:0,ok:0,miss:{},hit:{},days:[],cur:null,last:Date.now()};go("path")}
+const PR=["Блестяще! 🌟","Так держать, ты молодец! 💪","Великолепно! 🐉","Умница! Китайский тебя любит! ❤️","Невероятно! 🔥","Отличная работа! 👏","Ты растёшь на глазах! 🌱","Браво, мастер иероглифов! 🏯","Идеально! ✨","Как красиво у тебя выходит! 🎋","Ты просто чемпион! 🏆","Гордимся тобой! 🧭"];
+const rp=()=>PR[Math.floor(Math.random()*PR.length)];
+const learnedSet=()=>{const L=new Set(Object.keys(known));if(pace)Object.keys(prog).forEach(d=>dw(+d).forEach(w=>L.add(w.h)));return L};
+const need=s=>[...new Set(s.t.split(" ").filter(t=>D[t]))];
+const ST2=[["6. Утро","早上 我 起床 。 我 喝 牛奶 ， 吃 面包 。 我 去 学校 学习 汉语 。 老师 说 ： 你 好 ！ 我 很 高兴 。","Утром я встаю. Пью молоко и ем хлеб. Иду в школу учить китайский. Учитель говорит: «Привет!» Я очень рад.","Что пьёт рассказчик?",["Чай","Молоко","Воду","Кофе"],1],
+["7. В магазине","今天 我 和 妈妈 去 商店 。 我 想 买 一 件 衣服 。 这 件 衣服 很 漂亮 ， 但是 很 贵 。 妈妈 说 ： 不 买 。","Сегодня мы с мамой идём в магазин. Я хочу купить одежду. Она очень красивая, но дорогая. Мама говорит: не покупаем.","Почему не купили одежду?",["Она грязная","Она дорогая","Магазин закрыт","Нет мамы"],1],
+["8. Папа-врач","爸爸 是 医生 ， 他 在 医院 工作 。 他 很 忙 ， 也 很 累 。 晚上 他 回 家 ， 我们 一起 吃 晚饭 。","Папа — врач, он работает в больнице. Он очень занят и устаёт. Вечером он возвращается домой, и мы вместе ужинаем.","Где работает папа?",["В школе","В магазине","В больнице","В банке"],2],
+["9. Холодный день","今天 很 冷 ， 我 不 想 去 学校 。 我 想 在 家 喝 热 茶 ， 看 电视 。 妈妈 说 ： 好 吧 ！","Сегодня очень холодно, я не хочу в школу. Хочу дома пить горячий чай и смотреть телевизор. Мама говорит: ладно!","Что хочет делать рассказчик дома?",["Спать","Пить чай и смотреть ТВ","Готовить","Читать"],1],
+["10. Друзья","我 有 两 个 好 朋友 。 一 个 是 中国 人 ， 一 个 是 美国 人 。 我们 都 喜欢 学习 汉语 。","У меня два хороших друга. Один китаец, другой американец. Мы все любим учить китайский.","Сколько друзей?",["Один","Два","Три","Пять"],1],
+["11. В ресторане","我们 去 饭馆 吃 晚饭 。 我 要 一 个 鱼 ， 一 碗 面条 ， 还 有 水果 。 朋友 说 ： 真 好吃 ！","Мы идём ужинать в ресторан. Я заказываю рыбу, миску лапши и фрукты. Друг говорит: как вкусно!","Что заказал рассказчик?",["Мясо и рис","Рыбу, лапшу, фрукты","Только чай","Пиццу"],1],
+["12. День рождения","今天 是 我 的 生日 。 我 十 岁 了 ！ 朋友 说 ： 生日 快乐 ！ 我 很 高兴 。 妈妈 给 我 一 本 书 。","Сегодня мой день рождения. Мне десять лет! Друг говорит: с днём рождения! Я очень рад. Мама дарит мне книгу.","Сколько лет рассказчику?",["Пять","Восемь","Десять","Три"],2],
+["13. Метро","我 家 在 北京 。 我 坐 地铁 去 学校 。 地铁 很 快 ， 也 很 便宜 。 我 喜欢 坐 地铁 。","Я живу в Пекине. Езжу в школу на метро. Метро быстрое и дешёвое. Мне нравится ездить на метро.","Каким транспортом ездит в школу?",["Автобус","Метро","Такси","Поезд"],1],
+["14. Телефон","喂 ， 你 好 ！ 你 是 谁 ？ 我 是 小明 。 你 在 哪儿 ？ 我 在 家 。 明天 你 想 看 电影 吗 ？ 想 ！","— Алло, привет! Кто это? — Это Сяо Мин. — Ты где? — Я дома. — Хочешь завтра в кино? — Хочу!","Где Сяо Мин?",["В школе","Дома","В кино","В больнице"],1],
+["15. Кошка и собака","我 的 猫 很 小 ， 我 的 狗 很 大 。 猫 喜欢 吃 鱼 ， 狗 喜欢 吃 肉 。 我 爱 我 的 猫 和 狗 。","Моя кошка маленькая, а собака большая. Кошка любит рыбу, собака — мясо. Я люблю свою кошку и собаку.","Что любит есть кошка?",["Мясо","Рыбу","Хлеб","Яблоки"],1],
+["16. Фрукты","我 喜欢 吃 水果 。 苹果 五 块 ， 香蕉 三 块 。 我 买 两 个 苹果 ， 三 个 香蕉 。 我 很 高兴 。","Я люблю фрукты. Яблоко — пять юаней, банан — три. Покупаю два яблока и три банана. Я рад.","Сколько яблок купили?",["Одно","Два","Три","Пять"],1],
+["17. Моя комната","我 的 房间 很 小 ， 但是 很 漂亮 。 房间 里 有 一 张 床 和 一 张 桌子 。 我 在 桌子 上 写 汉字 。","Моя комната маленькая, но красивая. В ней кровать и стол. На столе я пишу иероглифы.","Что делает рассказчик за столом?",["Ест","Пишет иероглифы","Спит","Смотрит ТВ"],1]];
+ST2.forEach(x=>ST.push({n:x[0],t:x[1],r:x[2],q:x[3],o:x[4],a:x[5]}));
+const ST3=[
+["18. Выходной","星期六 我 不 上班 。 早上 我 和 朋友 去 公园 。 公园 里 有 很 多 人 ， 天气 很 好 。 我们 下午 一起 吃 饭 。","В субботу я не работаю. Утром мы с другом идём в парк. В парке много людей, погода хорошая. После обеда вместе едим.","Куда они пошли утром?",["В парк","В школу","В магазин","В больницу"],0],
+["19. Билет","我 想 去 上海 。 我 去 火车站 买 票 。 一 张 票 三百 块 。 火车 明天 早上 八 点 走 。","Я хочу поехать в Шанхай. Иду на вокзал за билетом. Билет стоит триста юаней. Поезд уходит завтра в восемь утра.","Сколько стоит билет?",["30 юаней","300 юаней","3 юаня","800 юаней"],1],
+["20. Погода","昨天 下雨 ， 今天 不 下雨 。 明天 会 很 热 。 我 想 去 游泳 ， 但是 我 没有 时间 。","Вчера был дождь, сегодня нет. Завтра будет очень жарко. Хочу плавать, но у меня нет времени.","Что хочет сделать рассказчик?",["Играть","Плавать","Спать","Работать"],1],
+["21. В гостях","朋友 请 我 去 他 家 吃 饭 。 他 家 很 大 ， 有 三 个 房间 。 他 妈妈 做 的 菜 非常 好吃 ， 我 吃 了 很 多 。","Друг пригласил меня к себе на обед. Его дом большой, три комнаты. Блюда его мамы очень вкусные, я много съел.","Сколько комнат в доме друга?",["Две","Три","Пять","Одна"],1],
+["22. Новая работа","我 的 哥哥 有 一 个 新 工作 。 他 在 一 家 大 公司 工作 。 他 每 天 八 点 去 公司 ， 六 点 回 家 。","У моего старшего брата новая работа. Он работает в большой компании. Каждый день в восемь идёт на работу, в шесть возвращается.","Во сколько брат идёт на работу?",["В шесть","В семь","В восемь","В девять"],2],
+["23. Выучить иероглифы","我 学 汉语 一 年 了 。 现在 我 会 说 ， 也 会 写 一点 汉字 。 汉字 很 难 ， 但是 我 觉得 很 有 意思 。","Я учу китайский уже год. Теперь умею говорить и немного писать иероглифы. Иероглифы трудные, но мне интересно.","Что думает рассказчик об иероглифах?",["Они скучные","Они трудные, но интересные","Они лёгкие","Он их не знает"],1],
+["24. Врач","我 今天 不 舒服 ， 头 很 疼 。 我 去 医院 看 医生 。 医生 说 ： 你 要 多 喝 水 ， 早 点 睡觉 。 我 说 ： 谢谢 医生 。","Сегодня мне нехорошо, болит голова. Иду в больницу к врачу. Врач говорит: пей больше воды и ложись пораньше. Я говорю: спасибо, доктор.","Что посоветовал врач?",["Больше пить воды","Не есть","Много работать","Пойти в школу"],0],
+["25. Письмо другу","我 想 给 老朋友 写 一 封 信 。 我 告诉 他 ： 我 在 北京 过 得 很 好 ， 学 了 很 多 新 东西 。 我 希望 他 明年 能 来 看 我 。","Я хочу написать письмо старому другу. Сообщаю ему: в Пекине у меня всё хорошо, я выучил много нового. Надеюсь, что в следующем году он приедет ко мне.","Чего надеется рассказчик?",["Что друг приедет","Что друг позвонит","Что он уедет","Что будет дождь"],0],
+["26. Опоздание","今天 我 起 得 太 晚 了 ， 所以 没 吃 早饭 。 我 跑 去 学校 ， 但是 还是 迟到 了 。 老师 笑 着 说 ： 明天 早 点 来 。","Сегодня я встал слишком поздно, поэтому не позавтракал. Побежал в школу, но всё равно опоздал. Учитель с улыбкой сказал: завтра приходи пораньше.","Почему рассказчик не позавтракал?",["Встал поздно","Не было еды","Не хотел","Был болен"],0],
+["27. Мечта","我 的 梦想 是 去 中国 旅行 。 我 想 看 长城 ， 也 想 吃 北京 烤鸭 。 为了 这 个 梦想 ， 我 每 天 努力 学习 汉语 。","Моя мечта — путешествовать по Китаю. Хочу увидеть Великую стену и попробовать пекинскую утку. Ради мечты каждый день усердно учу китайский.","Что хочет увидеть рассказчик?",["Великую стену","Море","Горы Тибета","Шанхайскую башню"],0]];
+ST3.forEach(x=>ST.push({n:x[0],t:x[1],r:x[2],q:x[3],o:x[4],a:x[5]}));
+const ST4=[
+["28. Путешествие в Китай","去年 夏天 ， 我 和 朋友 去 中国 旅行 。 我们 先 坐 飞机 到 北京 ， 然后 坐 火车 去 上海 。 在 北京 ， 我们 看 了 长城 ， 吃 了 北京 烤鸭 。 在 上海 ， 我们 住 在 一 家 很 漂亮 的 酒店 。 每 天 晚上 ， 我们 都 在 街上 走 ， 看 很 多 有意思 的 东西 。 我 说 汉语 ， 中国 人 都 很 高兴 。 这 是 我 最 好 的 旅行 。","Прошлым летом мы с другом поехали в Китай. Сначала летели в Пекин, потом на поезде в Шанхай. В Пекине мы увидели Великую стену и попробовали утку по-пекински. В Шанхае жили в красивом отеле. Каждый вечер гуляли по улицам и смотрели на интересное. Я говорил по-китайски, и китайцы радовались. Это моё лучшее путешествие.","Как они ехали из Пекина в Шанхай?",["На поезде","На самолёте","На машине","На метро"],0],
+["29. Один день в Пекине","早上 七 点 ， 我 起床 ， 喝 一 杯 热 茶 。 八 点 ， 我 坐 地铁 去 公司 。 中午 我 和 同事 在 饭馆 吃 面条 。 下午 我 很 忙 ， 开 了 两 个 会 。 晚上 六 点 ， 我 回 家 ， 给 妈妈 打 电话 。 她 问 我 ： 你 累 不 累 ？ 我 说 ： 有点 累 ， 但是 很 高兴 。 十 点 ， 我 睡觉 了 。","В семь утра я встаю и пью горячий чай. В восемь еду на метро в офис. В обед ем лапшу с коллегой в ресторане. После обеда очень занят, было два совещания. В шесть вечера иду домой и звоню маме. Она спрашивает: ты устал? Отвечаю: немного, но я счастлив. В десять ложусь спать.","Что делает рассказчик в обед?",["Ест лапшу","Спит","Читает","Звонит маме"],0],
+["30. Старый чайный дом","在 我们 的 城市 里 ， 有 一 家 老 茶馆 。 老板 是 一 位 八十 岁 的 爷爷 ， 他 每 天 都 坐 在 门口 看 报纸 。 他 的 茶 很 好喝 ， 很多 人 从 远 的 地方 来 喝 。 爷爷 常常 说 ： 喝茶 要 慢 ， 做 人 也 要 慢 。 我 现在 每 个 周末 都 去 那儿 ， 听 他 讲 以前 的 故事 。","В нашем городе есть старый чайный дом. Хозяин — дедушка восьмидесяти лет, каждый день сидит у входа с газетой. Чай у него очень вкусный, многие приезжают издалека. Дедушка часто говорит: чай пьют неспешно, и жить надо неспешно. Теперь я каждые выходные хожу туда слушать его рассказы о прошлом.","Сколько лет хозяину?",["80","18","60","8"],0]];
+ST4.forEach(x=>ST.push({n:x[0],t:x[1],r:x[2],q:x[3],o:x[4],a:x[5]}));
+
+
+function stories(){CURF=null;const L=learnedSet(),op=i=>i<3||need(ST[i]).every(h=>L.has(h)),ok=ST.filter((s,i)=>op(i)).length;
+$("#app").innerHTML=`<div class="sth"><small>📚 Истории</small><b>Открыто ${ok} из ${ST.length}</b><div class="bar"><i style="width:${ok/ST.length*100}%"></i></div><span>Первые 3 доступны сразу. Остальные откроются, когда выучишь их слова — заглядывай вперёд!</span></div>`+ST.map((s,i)=>{const nd=need(s),m=nd.filter(h=>!L.has(h)),pr=nd.length?Math.round((nd.length-m.length)/nd.length*100):100,o=op(i),tt=s.n.replace(/^\d+\.\s*/,""),tg=o?"button":"div";return `<${tg} ${o?`onclick="reader(${i})"`:""} class="sc ${o?"":"lk2"}"><i class="sn">${i+1}</i><div class="sb"><b>${tt}</b><span class="sp">${s.t.split(" ").slice(0,7).join("")}…</span><small>${lv(i)} ${nd.length} слов · ${o?(m.length?"доступна сразу":"открыта ✓"):"🔒 выучи ещё "+m.length}</small>${o?"":`<div class="bar"><i style="width:${pr}%"></i></div>`}</div><em>${o?"▶":"🔒"}</em></${tg}>`}).join("")}
+const BP=10,GN=["Порядок слов: подлежащее + сказуемое + дополнение: 我 爱 你.","Отрицание: 不 перед глаголом и прилагательным (我 不 去), 没 — для 有 и прошедшего.","Вопрос: добавь 吗 в конец предложения: 你 好 吗？","Счётные слова: число + 个/本/只 + предмет: 三 个 苹果.","Вопросительные слова ставятся на место ответа: 你 叫 什么 名字？","Принадлежность: 的 — 我 的 书.","Время ставится перед глаголом: 明天 我 去 学校.","Место: 在 + место + глагол: 我 在 家 学习.","Хочу / умею / могу: 想 / 会 / 能 + глагол: 我 会 说 汉语.","Сравнение: 比 — 他 比 我 高.","很 ставится перед прилагательным: 今天 很 冷.","了 показывает завершённое действие: 我 买 了 书."];
+function book(p){p=p||0;window.BPG=p;const n=Math.ceil(W.length/BP),ws=W.slice(p*BP,p*BP+BP),ex=S.filter(s=>s.t.some(t=>ws.some(w=>w.h==t))).slice(0,3);
+const L2=learnedSet(),pc=Array.from({length:n},(_,i)=>{const a=W.slice(i*BP,i*BP+BP);return a.length>0&&a.every(w=>L2.has(w.h))});
+$("#app").innerHTML=`<div class="bkh"><small>📕 Книга HSK 1</small><b>Глава ${p+1}<span> / ${n}</span></b><div class="bar"><i style="width:${(p+1)/n*100}%"></i></div><button class="sw" onclick="go('favs')">❤️ ${Object.keys(T.fav||{}).length}</button></div><div class="card"><div class="mu">Нажми на слово — откроется карточка · 🟢 легко 🟡 средне 🔴 сложнее</div><div class="wl">${ws.map(w=>`<div class="wr" onclick="wd('${w.h}')"><b class="bh2">${w.h}</b><div class="wm"><b>${w.p}</b><span>${w.r}</span></div><span>${lvW(w.h)}</span><button class="ib" onclick="event.stopPropagation();say('${w.h}')">🔊</button><button class="ib" onclick="event.stopPropagation();bfav('${w.h}',${p})">${T.fav&&T.fav[w.h]?"❤️":"🤍"}</button></div>`).join("")}</div>`+(ex.length?`<b>Примеры</b>${ex.map(e=>`<div class="sent" style="font-size:22px;text-align:left">${e.t.map(hz).join(" ")}<div class="mu" style="font-size:14px;line-height:1.3">${e.r}</div></div>`).join("")}`:"")+`<div class="bub" style="margin-top:12px"><small>💡 Заметка по грамматике</small>${GN[p%GN.length]}</div><div class="row"><button class="btn p" onclick="bq(${p})">✍️ Проверь себя</button></div></div><div class="pager"><button class="pg" onclick="book(${Math.max(0,p-1)})" ${p?"":"disabled"}>‹</button><div class="chips">${pc.map((d,i)=>`<button class="ch ${i==p?"on":""} ${d?"dn2":""}" onclick="book(${i})">${i+1}</button>`).join("")}</div><button class="pg" onclick="book(${Math.min(n-1,p+1)})" ${p<n-1?"":"disabled"}>›</button></div><div class="c mu" style="margin-top:4px">Страница ${p+1} из ${n}</div>`;
+setTimeout(()=>{const c=document.querySelector(".ch.on");c&&c.scrollIntoView({inline:"center",block:"nearest"})},0)}
+function bfav(h,p){T.fav=T.fav||{};T.fav[h]?delete T.fav[h]:T.fav[h]=1;sp();book(p)}
+function bq(p){POOL=W.slice(p*BP,p*BP+BP);LCB=r=>{POOL=W;$("#app").innerHTML=cmh(r>=.8?rp():"Перечитай главу ещё раз — получится!","dragon")+`<div class="row"><button class="btn p" onclick="book(${p})">📕 К странице</button></div>`};quiz(["t","p","g"],6)}
+function report(){const w=weak(),ty=T.ty||{},NX={t:"Перевод",g:"Пропуски",l:"Аудио",p:"Пиньинь",m:"Фразы"},sk=Object.keys(NX).map(k=>{const o=ty[k]||{q:0,ok:0};return{k,q:o.q,p:o.q?Math.round(o.ok/o.q*100):null}}),low=sk.filter(x=>x.p!=null).sort((a,b)=>a.p-b.p)[0],l7=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return T.days.includes(d.toISOString().slice(0,10))});
+$("#app").innerHTML=cmh("Вот твой подробный отчёт. Я слежу за каждым шагом!")+`<div class="card rep"><b>📊 Обзор</b><div class="chips"><span>🎯 ${T.q?Math.round(T.ok/T.q*100):0}% точность</span><span>✍️ ${T.q} ответов</span><span>🔥 ${dstreak()} дн. подряд</span><span>📚 ${learnedSet().size}/${W.length} слов</span><span>📖 ${Object.keys(T.rd||{}).length}/${ST.length} историй</span><span>📝 тестов: ${T.tp||0}/${T.tn||0}</span><span>✅ верных: ${T.ok}</span></div><div class="bar" style="height:12px;margin-top:10px"><i style="width:${Math.round(learnedSet().size/W.length*100)}%"></i></div></div><div class="card"><b>🧠 Навыки</b>${sk.map(x=>`<div class="sk"><span>${NX[x.k]}</span><div class="bar"><i style="width:${x.p||0}%"></i></div><span>${x.p==null?"—":x.p+"%"}</span></div>`).join("")}</div><div class="card"><b>📅 Последние 7 дней</b><div class="chips">${l7.map(a=>`<span>${a?"✅":"⬜"}</span>`).join("")}</div></div>`+cmh(`${low&&low.p<80?`Больше тренируй «${NX[low.k]}» — там ${low.p}%.`:T.q<20?"Пройди хотя бы один урок — и я дам точный совет.":"Ты силён во всех навыках! Пора на экзамен. 🏆"}${w.length?` Слабых слов: ${w.length}.`:""}`,"tiger")+`<div class="row"><button class="btn p" onclick="go('lab')">🧪 Лаборатория слабых слов</button></div>`}
+function lab(){const w=weak();if(!w.length){$("#app").innerHTML=cmh("Слабых слов нет — ты великолепен! 🌟","fox")+`<div class="row"><button class="btn p" onclick="go('path')">🗺️ К карте</button></div>`;return}
+$("#app").innerHTML=cmh("Лаборатория слов. Прочитай, повтори вслух 🔊, посмотри пример — и потренируйся.","fox")+w.slice(0,6).map(k=>{const d=D[k],ex=S.find(s=>s.t.includes(k));return`<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><span class="big" style="font-size:44px">${d.h}</span><button class="btn" onclick="say('${d.h}',.6)">🔊 медленно</button></div><div><b>${d.p}</b> — ${d.r}</div><div class="mu">Ошибок: ${T.miss[k]} · верно: ${T.hit[k]||0}</div>${ex?`<div class="sent" style="font-size:20px;text-align:left">${ex.t.map(hz).join(" ")}<div class="mu" style="font-size:13px;line-height:1.3">${ex.r}</div></div>`:""}<div class="mu">✍️ Совет: напиши слово 3 раза и произнеси вслух.</div></div>`}).join("")+`<div class="row"><button class="btn p" onclick="drill()">🎯 Тренировка (12 заданий)</button></div>`}
+let H=[],bk=0;
+let CURF=null;function back(){const e=H.pop();if(typeof e=="function"){e();nav();return}bk=1;go(e||"home")}
+const LV=["🟢","🟡","🔴"],lvW=h=>LV[Math.min(2,Math.floor(W.findIndex(w=>w.h==h)/(W.length/3)))],lv=i=>LV[i<ST.length/3?0:i<ST.length*2/3?1:2],gi=id=>document.getElementById(id);
+const UN={"我":"«Я»; ставится перед глаголом: 我 是 学生.","你":"«Ты»; вежливо — 您.","是":"Связка «быть» между существительными: 他 是 医生. Перед прилагательным не нужна.","不":"Отрицание перед глаголом и прилагательным: 不 好.","有":"«Иметь / есть»; отрицание — 没有.","吗":"В конце предложения делает его вопросом.","的":"Принадлежность: 我 的 书 — «моя книга».","了":"Показывает, что действие совершено: 我 买 了 书.","在":"«Находиться, в»: 我 在 家.","很":"Ставится перед прилагательным: 很 好.","个":"Самое универсальное счётное слово: 一 个 人.","想":"«Хотеть» + глагол: 我 想 去.","会":"«Уметь» (навык): 我 会 说 汉语.","好":"«Хороший»; в приветствии 你 好.","谢谢":"«Спасибо»; в ответ — 不 客气.","请":"«Пожалуйста» перед просьбой: 请 喝 茶.","什么":"«Что / какой» на месте ответа: 这 是 什么？","谁":"«Кто»: 他 是 谁？","哪儿":"«Где / куда»: 你 去 哪儿？","多少":"«Сколько» (для больших чисел): 多少 钱？","几":"«Сколько» (до 10): 你 几 岁？"};
+function wd(h,r){const d=D[h];if(!d)return;if(!r)H.push(view=="book"?()=>book(window.BPG||0):view=="read"&&CURF?CURF:view);const ex=S.filter(x=>x.t.includes(h)).slice(0,3),f=T.fav&&T.fav[h];
+$("#app").innerHTML=`<button class="back" onclick="book(window.BPG||0)">← К книге</button><div class="card c"><div class="big">${h}</div><h3 style="margin:0">${d.p}</h3><div style="font-size:20px">${d.r}</div><div class="mu">Сложность: ${lvW(h)} · произношение: «${d.p}»</div><div class="row"><button class="btn p" onclick="say('${h}')">🔊 Обычно</button><button class="btn" onclick="say('${h}',.5)">🐢 Медленно</button><button class="btn" onclick="fav('${h}')">${f?"❤️ В избранном":"🤍 В избранное"}</button></div></div><div class="card"><b>💡 Когда использовать</b><p>${UN[h]||"Обычное слово уровня HSK 1. Смотри его в примерах и историях."}</p></div>${ex.length?`<div class="card"><b>📝 Примеры</b>${ex.map(e=>`<div class="sent" style="font-size:22px;text-align:left">${e.t.map(hz).join(" ")} <button class="x" onclick="say('${e.t.join("")}')">🔊</button><div class="mu" style="font-size:14px">${e.r}</div></div>`).join("")}</div>`:`<div class="card mu">Для этого слова примеров пока нет.</div>`}`}
+function fav(h){T.fav=T.fav||{};T.fav[h]?delete T.fav[h]:T.fav[h]=1;sp();wd(h,1)}
+const favList=()=>Object.keys(T.fav||{}).map(h=>D[h]).filter(Boolean);
+function favs(){const f=favList();$("#app").innerHTML=cmh(f.length?"Твои любимые слова. Нажми — откроется карточка.":"Здесь пока пусто. Открой слово в книге и нажми 🤍.")+(f.length?`<div class="card"><table class="bt">${f.map(w=>`<tr onclick="wd('${w.h}')"><td class="bh">${w.h}</td><td>${w.p}</td><td>${w.r}</td><td>❤️</td></tr>`).join("")}</table></div><div class="row"><button class="btn p" onclick="fc('z',favList())">🃏 Карточки</button></div>`:"")}
+const SD=[1,2,4,8,16];
+function srsUp(k,ok){T.srs=T.srs||{};const n=Date.now();if(!ok)T.srs[k]={b:0,due:n+6e5};else if(T.srs[k]){const b=Math.min(T.srs[k].b+1,4);T.srs[k]={b,due:n+SD[b]*864e5}}}
+const dueList=()=>Object.keys(T.srs||{}).filter(k=>D[k]&&T.srs[k].due<=Date.now()).map(k=>D[k]);
+function rev(){const du=dueList().length;$("#app").innerHTML=cmh(du?`Сегодня на повторении <b>${du}</b> слов. Повторим — и они закрепятся надолго! 🧠`:"На сегодня повторять нечего — отлично! Можно потренировать карточки или избранное.","fox")+`<div class="hub">${[["fcd","📅","Повторить сегодня",du+" слов","#ff7a45,#ff3d77"],["lab","🧪","Сложные слова",weak().length+" слов","#7c4dff,#3fa7ff"],["fcz","🇨🇳","Карточки","Китайский → русский","#43c59e,#2e8b57"],["fcr","🇷🇺","Карточки","Русский → китайский","#f0a830,#e8452c"],["favs","❤️","Избранное",Object.keys(T.fav||{}).length+" слов","#e8a000,#b3122a"]].map(x=>`<button class="ht" style="background:linear-gradient(135deg,${x[4]})" onclick="go('${x[0]}')"><span>${x[1]}</span><b>${x[2]}</b>${x[3]}</button>`).join("")}</div>`}
+let FC={l:[],i:0,m:"z",sh:0};
+function fc(m,list){list=list||[...learnedSet()].map(h=>D[h]).filter(Boolean);if(!list.length)list=W.slice(0,20);FC={l:sh(list),i:0,m,sh:0};fc2()}
+function fc2(){if(FC.i>=FC.l.length){$("#app").innerHTML=cmh("Колода закончена! "+rp())+`<div class="row"><button class="btn p" onclick="go('rev')">🧠 К повторению</button></div>`;return}
+const w=FC.l[FC.i],z=FC.m!="r";$("#app").innerHTML=`<button class="back" onclick="go('rev')">← Назад</button><div class="bar"><i style="width:${FC.i/FC.l.length*100}%"></i></div><div class="card c"><div class="mu">${z?"Вспомни перевод":"Вспомни по-китайски"} · ${FC.i+1}/${FC.l.length}</div>${z?`<div class="big">${w.h}</div>`:`<div style="font-size:30px;margin:20px 0">${w.r}</div>`}${FC.sh?`<hr style="border:0;border-top:1px dashed var(--bd)">${z?"":`<div class="big">${w.h}</div>`}<div style="font-size:22px"><b>${w.p}</b></div>${z?`<div style="font-size:22px">${w.r}</div>`:""}`:""}<div class="row"><button class="btn" onclick="say('${w.h}')">🔊</button>${FC.sh?`<button class="btn" onclick="fr(0)">😕 Забыл</button><button class="btn p" onclick="fr(1)">😊 Помню</button>`:`<button class="btn p" onclick="FC.sh=1;fc2()">Показать ответ</button>`}</div></div>`}
+function fr(ok){const w=FC.l[FC.i];srsUp(w.h,ok);if(ok){T.hit[w.h]=(T.hit[w.h]||0)+1;xp+=2}else T.miss[w.h]=(T.miss[w.h]||0)+1;mark();sp();save();nav();FC.i++;FC.sh=0;fc2()}
+let TR=null;
+function tr(){TR=sh(S)[0];const bank=sh([...new Set(TR.t.concat(sh(W).slice(0,6).map(w=>w.h)))]);
+$("#app").innerHTML=`<div class="card"><b>✍️ Переведи на китайский</b><h3>${TR.r}</h3><input id="ti" placeholder="Иероглифы (или нажимай слова ниже)" style="width:100%;font-size:24px;padding:10px;border-radius:12px;border:2px solid var(--bd);background:var(--card);color:var(--tx)"><div style="margin-top:8px">${bank.map(w=>`<span class="tok" style="font-size:20px" onclick="gi('ti').value+='${w}'">${w}</span>`).join("")}</div><div class="row"><button class="btn" onclick="gi('ti').value=''">Очистить</button><button class="btn p" onclick="trc()">Проверить</button></div><div id="fb"></div><div class="row"><button class="btn" onclick="tr()">Другая фраза</button></div></div>`}
+function tok(str){const ks=Object.keys(D).sort((a,b)=>b.length-a.length),r=[];let i=0;while(i<str.length){const k=ks.find(k=>str.startsWith(k,i));if(k){r.push(k);i+=k.length}else{if(!/[\s，。？！、：,.?!]/.test(str[i]))r.push("?"+str[i]);i++}}return r}
+function trc(){const v=gi("ti").value;if(!v.trim()){gi("fb").innerHTML="<p class='mu'>Сначала попробуй ответить сам 🙂</p>";return}const u=tok(v),c=TR.t,ok=u.join()==c.join(),k=c.find(x=>D[x]);let h;
+if(ok){xp+=10;streak++;track(k,1,"m");save();nav();confetti();h=`<p>✅ ${rp()}</p><div class="sent">${c.map(hz).join(" ")}</div>`}
+else{track(k,0,"m");const ms=c.filter(x=>!u.includes(x)),ex=u.filter(x=>!c.includes(x)),od=!ms.length&&!ex.length;
+h=`<p>❌ Не совсем. Разбор:</p><ul style="text-align:left;font-size:15px">${ms.length?`<li>Не хватает: ${ms.map(x=>x+" ("+D[x].r+")").join(", ")}</li>`:""}${ex.length?`<li>Лишнее или неверное: ${ex.join(", ").replace(/\?/g,"")}</li>`:""}${od?"<li>Слова верные, но порядок другой: сначала кто, затем время/место, потом действие.</li>":""}</ul><b>Правильный вариант:</b><div class="sent">${c.map(hz).join(" ")}</div><div class="mu">${c.map(x=>D[x].p).join(" ")}</div><div class="row"><button class="btn" onclick="say('${c.join("")}')">🔊</button><button class="btn p" onclick="gi('fb').innerHTML='';gi('ti').value=''">🔁 Ещё раз</button></div>`}
+gi("fb").innerHTML=h}
+function mt(i){const ws=need(ST[i]).map(h=>D[h]);POOL=ws;LCB=r=>{POOL=W;$("#app").innerHTML=`<div class="card c win"><div class="big">${r>=.75?"🎉":"💪"}</div><h3>Мини-тест: ${Math.round(r*100)}%</h3><p>${r>=.75?rp():"Перечитай историю и попробуй ещё раз!"}</p></div><div class="row"><button class="btn p" onclick="reader(${i})">📖 К истории</button><button class="btn" onclick="go('read')">К списку</button></div>`;if(r>=.75)confetti()};quiz(["t","p","g","m","t"],5)}
+function home(){const L=learnedSet(),n=pace?ND():0,done=Object.keys(prog).length,rs=T.cur&&!prog[T.cur.d],c=pace?unl():0,rd=Object.keys(T.rd||{}).length,pw=Math.round(L.size/W.length*100),tot=Math.round((pw+(n?done/n*100:0)+rd/ST.length*100)/3);
+const cont=!pace?`<button class="btn p big2" onclick="go('path')">▶ Начать обучение</button>`:rs?`<button class="btn p big2" onclick="startDay(${T.cur.d},${T.cur.i})">▶ День ${T.cur.d}: ${T.cur.n}</button>`:c<=n?`<button class="btn p big2" onclick="startDay(${c})">▶ Урок: день ${c}</button>`:`<button class="btn p big2" onclick="go('hub')">🎯 Тренажёр</button>`;
+$("#app").innerHTML=`<button class="trh" onclick="go('hub')"><div><small>Тренажёр</small><b>Прокачай китайский</b><span>12 видов заданий · жми и играй</span></div><em>🎯</em></button><div class="card cont"><b>Продолжить обучение</b><div class="mu">${rs?"Ты остановился: день "+T.cur.d+", «"+T.cur.n+"»":!pace?"Тренер составит план под тебя":c<=n?"Следующий урок: день "+c+" из "+n:"Все уроки пройдены 🏆"}</div><div class="row">${cont}</div></div><div class="card prg"><b>Твой прогресс · ${tot}%</b><div class="bar" style="height:12px"><i style="width:${tot}%"></i></div>${[["📚 Слова",L.size,W.length],["📖 Истории",rd,ST.length],["🗓️ Уроки",done,n||29]].map(x=>`<div class="sk"><span>${x[0]}</span><div class="bar"><i style="width:${Math.min(100,Math.round(x[1]/x[2]*100))}%"></i></div><span>${x[1]}/${x[2]}</span></div>`).join("")}</div>${wod()}<div class="hub">${[["book","📖","Книга","Слова с примерами","#ff7a45,#ff3d77"],["read","📚","Истории",ST.length+" рассказов","#7c4dff,#3fa7ff"],["hub","🎯","Тренажёр","12 видов заданий","#ffb020,#ff6a3d"],["rev","🧠","Повторение",dueList().length+" слов на сегодня","#14c28a,#4fd8c4"],["report","📊","Прогресс","Серия: "+dstreak()+" дн.","#5b4bff,#b14dff"]].map(x=>`<button class="ht" style="background:linear-gradient(135deg,${x[4]})" onclick="go('${x[0]}')"><span>${x[1]}</span><b>${x[2]}</b>${x[3]}</button>`).join("")}</div>`}
+let _sv;new MutationObserver(()=>{if(view!="path")return;clearTimeout(_sv);_sv=setTimeout(()=>{const c=document.querySelector(".nd.cur");c&&c.scrollIntoView({block:"center",behavior:"smooth"})},150)}).observe($("#app"),{childList:true});
+nav();go("home");
+</script><script>try{if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js'))}catch(e){}</script></body></html>
